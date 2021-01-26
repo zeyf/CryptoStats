@@ -7,7 +7,7 @@ const useSortableData = (items) => {
     const {SORTEDFIELD, setSortField} = useContext(TableContext);
 
   
-    const sortedItems = React.useMemo(() => {
+    const sortedItems = useMemo(() => {
       let sortableItems = [...items];
       if (SORTEDFIELD !== null) {
         sortableItems.sort((a, b) => {

@@ -15,8 +15,8 @@ const TablePagination = () => {
             <ul>
                 {PageNumbers.map((item, i) => {
                     return <button onClick={() => {
-                        setCurrentPage(++i)
-                        GetCryptos(CURRENTPAGE, POSTSPERPAGE)
+
+                        setCurrentPage(item, POSTSPERPAGE)
                     }}>
                                 {item}
                             </button>

@@ -26,12 +26,17 @@ const TableState = ({children}) => {
 
     const GetCryptos = async (currentPage, perPage) => {
         SetLoading();
+        const limit = perPage * currentPage
         const skip = () => {
-            if (currentPage) {
-                return perPage * 0
+            if (limit === 25) {
+                return 0;
+            } else {
+                return limit - perPage
             }
         }
-        const limit = perPage * currentPage
+
+        console.log(skip(), limit)
+        console.log(`https://api.coinstats.app/public/v1/coins?skip=${skip()}&limit=${limit}&currency=USD `)
 
         const response = await axios.get(`https://api.coinstats.app/public/v1/coins?skip=${skip()}&limit=${limit}&currency=USD`)
         dispatch({
@@ -47,11 +52,13 @@ const TableState = ({children}) => {
         })
     }
 
-    const setCurrentPage = (pageSelected) => {
+    const setCurrentPage = (currentPage, perPage) => {
+        console.log(currentPage)
         dispatch({
             type: SET_CURRENT_PAGE,
-            payload: pageSelected
+            payload: currentPage
         })
+        GetCryptos(currentPage, perPage);
     }
 
     return <TableContext.Provider value={{

@@ -19,7 +19,7 @@ const Table = () => {
         //eslint-disable-next-line
     }, [])
 
-    const { items, requestSort } = useSortableData(CRYPTOS);
+    let { items, requestSort } = useSortableData(CRYPTOS);
     const IndexOfLastPost = CURRENTPAGE * POSTSPERPAGE
     const IndexOfFirstPost = IndexOfLastPost - POSTSPERPAGE
     const CurrentPosts = items.slice(IndexOfFirstPost, IndexOfLastPost)
@@ -30,6 +30,7 @@ const Table = () => {
             
             {LOADING ? <Spinner /> :<>
              <table>
+
                 <thead>
                     <tr>
                         <th><button style={{width: '100%'}} onClick={() => {requestSort('rank')}} >
@@ -64,8 +65,11 @@ const Table = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {CurrentPosts.map((item, i) => {
-                        return <tr>
+                    {items.map((item, i) => {
+                        
+                        if (i < 25) {
+
+                            return <tr>
                             <td>{item.rank}</td>
                             <td>
                                 <Link style={{textDecoration: 'none', margin: '0px', padding: '0px'}} to={setLinkParamByID(item.id)}>
@@ -79,6 +83,7 @@ const Table = () => {
                             <td>{item.priceBtc}</td>
                             <td>{newVol(item.volume)}</td>
                         </tr>
+                        }
                     })}
                 </tbody>
                 </table>
