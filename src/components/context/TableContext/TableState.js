@@ -1,7 +1,7 @@
 import TableContext from './TableContext';
 import TableReducer from './TableReducer';
 import {useReducer} from 'react';
-import {GET_CRYPTOS, SET_LOADING} from '../types';
+import {GET_CRYPTOS, SET_LOADING, SET_SORTED_FIELD} from '../types';
 import axios from 'axios';
 
 
@@ -9,7 +9,8 @@ import axios from 'axios';
 const TableState = ({children}) => {
     const InitialState = {
         CRYPTOS: [],
-        LOADING: false
+        LOADING: false,
+        SORTEDFIELD: null
     }
 
     const [state, dispatch] = useReducer(TableReducer, InitialState);
@@ -27,14 +28,23 @@ const TableState = ({children}) => {
             type: GET_CRYPTOS,
             payload: response.data.coins
         })
-        console.log(response.data.coins) // test
+        
+    }
+
+    const setSortField = (field) => {
+        dispatch({
+            type: SET_SORTED_FIELD,
+            payload: field
+        })
+        console.log(field)
     }
 
     return <TableContext.Provider value={{
             CRYPTOS: state.CRYPTOS,
             LOADING: state.LOADING,
-            COLUMNS: state.COLUMNS,
-            GetCryptos
+            SORTEDFIELD: state.SORTEDFIELD,
+            GetCryptos,
+            setSortField
             }}>
                 {children}
             </TableContext.Provider>

@@ -8,7 +8,6 @@ const TableFunctions = {
         if (String(price)[0] === '0') {
             return price.toFixed(4)
         } else if (String(price)[0] !== '0') {
-            console.log(String(price)[0])
             return price.toFixed(2)
         }
     },

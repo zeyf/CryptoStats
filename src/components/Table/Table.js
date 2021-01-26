@@ -4,16 +4,22 @@ import Spinner from '../layout/Spinner/Spinner'
 import {Sparklines} from 'react-sparklines';
 import TableFunctions from '../../functions/table functions/TableFunctions'
 import {Link} from 'react-router-dom'
+import useSortableData from './useSortableData'
 
 const Table = () => {
-    const tableContext = useContext(TableContext);
-    const {LOADING, CRYPTOS, GetCryptos} = tableContext;
+
+    // UPPERCASE ONLY = STATE VALUES | NON UPPERCASE = FUNCTIONS //
+    const {LOADING, CRYPTOS, SORTEDFIELD, GetCryptos, setSortField} = useContext(TableContext);
+    // "OUTSOURCING" functions on style and manipulation of general data representation for table data to keep a clean component
     const {newVol, newPrice, setPriceColor, setLinkParamByID} = TableFunctions;
 
     useEffect(() => {
         GetCryptos();
         //eslint-disable-next-line
     }, [])
+
+    const { items, requestSort } = useSortableData(CRYPTOS);
+
     return (
         <div>
             
@@ -21,22 +27,46 @@ const Table = () => {
                 
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>NAME</th>
-                        <th>24H CHANGE</th>
-                        <th>PRICE</th>
-                        <th>PRICE IN BTC</th>
-                        <th>24H VOLUME</th>
+                        <th><button style={{width: '100%'}} onClick={() => {requestSort('rank')}} >
+                             #
+                            </button>
+                        </th>
+                        <th>
+                            <button style={{width: '100%'}} onClick={() => {requestSort('name')}}>
+                                NAME
+                            </button>
+                        </th>
+                        <th>
+                            <button style={{width: '100%'}} onClick={() => {requestSort('priceChange1d')}}>
+                                24H CHANGE
+                            </button>
+                        </th>
+                        <th>
+                            <button style={{width: '100%'}} onClick={() => {requestSort('price')}}>
+                                PRICE
+                            </button>
+                        </th>
+                        <th>
+                            <button style={{width: '100%'}} onClick={() => {requestSort('priceBTC')}}>
+                                PRICE IN BTC
+                            </button>
+                        </th>
+                        <th>
+                            <button style={{width: '100%'}} onClick={() => {requestSort('volume')}}>
+                                24H VOLUME
+                            </button>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {CRYPTOS.map((item, i) => {
+                    {items.map((item, i) => {
                         return <tr>
                             <td>{item.rank}</td>
                             <td>
                                 <Link style={{textDecoration: 'none', margin: '0px', padding: '0px'}} to={setLinkParamByID(item.id)}>
                                     <img src={item.icon} style={{height: '20px', width: '20px'}} />
                                     {item.name}
+                                    {` • ${item.symbol}`}
                                 </Link>
                             </td>
                             <td style={setPriceColor(item.priceChange1d)}>{item.priceChange1d}</td>

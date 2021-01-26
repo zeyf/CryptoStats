@@ -1,2 +1,3 @@
 export const SET_LOADING = 'SET_LOADING';
 export const GET_CRYPTOS = 'GET_CRYPTOS';
+export const SET_SORTED_FIELD = 'SET_SORTED_FIELD';

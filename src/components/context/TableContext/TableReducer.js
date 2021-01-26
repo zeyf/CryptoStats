@@ -1,4 +1,4 @@
-import {SET_LOADING, GET_CRYPTOS} from '../types';
+import {SET_LOADING, GET_CRYPTOS, SET_SORTED_FIELD} from '../types';
 
 const TableReducer = (state, action) => {
     switch(action.type) {
@@ -14,6 +14,11 @@ const TableReducer = (state, action) => {
                 ...state,
                 CRYPTOS: action.payload,
                 LOADING: false
+            }
+        case SET_SORTED_FIELD:
+            return {
+                ...state,
+                SORTEDFIELD: action.payload
             }
     }
 }

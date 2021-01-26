@@ -3,6 +3,7 @@ import TableState from './components/context/TableContext/TableState';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navbar from './components/layout/Navbar/Navbar';
 import Table from './components/Table/Table'
+import Crypto from './components/Crypto/Crypto'
 
 const App = () => {
 
