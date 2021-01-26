@@ -1,3 +1,5 @@
 export const SET_LOADING = 'SET_LOADING';
 export const GET_CRYPTOS = 'GET_CRYPTOS';
 export const SET_SORTED_FIELD = 'SET_SORTED_FIELD';
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const SET_POST_PER_PAGE = 'SET_POST_PER_PAGE';

@@ -5,26 +5,31 @@ import {Sparklines} from 'react-sparklines';
 import TableFunctions from '../../functions/table functions/TableFunctions'
 import {Link} from 'react-router-dom'
 import useSortableData from './useSortableData'
+import TablePagination from './TablePagination'
 
 const Table = () => {
 
     // UPPERCASE ONLY = STATE VALUES | NON UPPERCASE = FUNCTIONS //
-    const {LOADING, CRYPTOS, SORTEDFIELD, GetCryptos, setSortField} = useContext(TableContext);
+    const {LOADING, CRYPTOS, SORTEDFIELD, CURRENTPAGE, POSTSPERPAGE, GetCryptos, setSortField} = useContext(TableContext);
     // "OUTSOURCING" functions on style and manipulation of general data representation for table data to keep a clean component
     const {newVol, newPrice, setPriceColor, setLinkParamByID} = TableFunctions;
 
     useEffect(() => {
-        GetCryptos();
+        GetCryptos(CURRENTPAGE, POSTSPERPAGE);
         //eslint-disable-next-line
     }, [])
 
     const { items, requestSort } = useSortableData(CRYPTOS);
+    const IndexOfLastPost = CURRENTPAGE * POSTSPERPAGE
+    const IndexOfFirstPost = IndexOfLastPost - POSTSPERPAGE
+    const CurrentPosts = items.slice(IndexOfFirstPost, IndexOfLastPost)
 
+    console.log(IndexOfLastPost)
     return (
         <div>
             
-            {LOADING ? <Spinner /> : <table>
-                
+            {LOADING ? <Spinner /> :<>
+             <table>
                 <thead>
                     <tr>
                         <th><button style={{width: '100%'}} onClick={() => {requestSort('rank')}} >
@@ -59,7 +64,7 @@ const Table = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {items.map((item, i) => {
+                    {CurrentPosts.map((item, i) => {
                         return <tr>
                             <td>{item.rank}</td>
                             <td>
@@ -76,7 +81,10 @@ const Table = () => {
                         </tr>
                     })}
                 </tbody>
-                </table>}
+                </table>
+            <TablePagination />
+            </>
+                }
         </div>
     )
 }

@@ -1,4 +1,11 @@
-import {SET_LOADING, GET_CRYPTOS, SET_SORTED_FIELD} from '../types';
+import {
+    SET_LOADING, 
+    GET_CRYPTOS, 
+    SET_SORTED_FIELD,
+    SET_CURRENT_PAGE
+} from '../types';
+
+// consider adding set post per page to allow user to change it
 
 const TableReducer = (state, action) => {
     switch(action.type) {
@@ -19,6 +26,11 @@ const TableReducer = (state, action) => {
             return {
                 ...state,
                 SORTEDFIELD: action.payload
+            }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                CURRENTPAGE: action.payload
             }
     }
 }

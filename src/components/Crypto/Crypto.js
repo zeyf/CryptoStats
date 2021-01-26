@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Crypto = ({match}) => {
-
+    console.log(match)
     // use match.
 
     return (
