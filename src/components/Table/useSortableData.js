@@ -15,7 +15,7 @@ const useSortableData = (items) => {
             return SORTEDFIELD.direction === 'ascending' ? -1 : 1;
           }
           if (a[SORTEDFIELD.key] > b[SORTEDFIELD.key]) {
-            return SORTEDFIELD.direction === 'ascending' ? 1 : -1;
+            return SORTEDFIELD.direction === 'descending' ? 1 : -1;
           }
           return 0;
         });

@@ -26,18 +26,14 @@ const TableState = ({children}) => {
 
     const GetCryptos = async (currentPage, perPage) => {
         SetLoading();
-        const limit = perPage * currentPage
+        const limit = perPage;
         const skip = () => {
-            if (limit === 25) {
+            if (limit === limit * currentPage) {
                 return 0;
             } else {
-                return limit - perPage
+                return (limit * currentPage)
             }
         }
-
-        console.log(skip(), limit)
-        console.log(`https://api.coinstats.app/public/v1/coins?skip=${skip()}&limit=${limit}&currency=USD `)
-
         const response = await axios.get(`https://api.coinstats.app/public/v1/coins?skip=${skip()}&limit=${limit}&currency=USD`)
         dispatch({
             type: GET_CRYPTOS,
@@ -53,7 +49,6 @@ const TableState = ({children}) => {
     }
 
     const setCurrentPage = (currentPage, perPage) => {
-        console.log(currentPage)
         dispatch({
             type: SET_CURRENT_PAGE,
             payload: currentPage
