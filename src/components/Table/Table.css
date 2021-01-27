@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid;
+    width: 100%;
+
 }
 
 .table--primary {
@@ -19,16 +20,40 @@
     text-align: center;
 }
 
-.tablebody__data:nth-child(2) {
-    text-align: none;
-}
 
-td button.ascending::after {
-    content: '👇';
-    margin-left: 1em;
-}
 
-.tablebody__data.descending::after {
-    content: '☝️';
-    margin-left: 1em;
-  }
+@media only screen and (max-width: 600px) {
+
+    
+    .table--primary {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .tablebody__data--pricechange24h {
+        display: none;
+    }
+    .tablebody__data--priceinbtc {
+        display: none;
+    }
+    .tablebody__data--volume {
+        display: none;
+    }
+    .tablebody__data--sparkline {
+        display: none;
+    }
+    /*  */
+
+    .table__headcol--pricechange24h {
+        display: none;
+    }
+    .table__headcol--priceinbtc {
+        display: none;
+    }
+    .table__headcol--volume {
+        display: none;
+    }
+    .table__headcol--sparkline {
+        display: none;
+    }
+}

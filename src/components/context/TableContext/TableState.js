@@ -31,7 +31,7 @@ const TableState = ({children}) => {
             if (limit === limit * currentPage) {
                 return 0;
             } else {
-                return (limit * currentPage)
+                return (limit * currentPage) - perPage
             }
         }
         const CoinStatsResponse = await axios.get(`https://api.coinstats.app/public/v1/coins?skip=${skip()}&limit=${limit}&currency=USD`)

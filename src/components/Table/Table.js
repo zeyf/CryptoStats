@@ -1,7 +1,7 @@
 import React, {useEffect, useContext} from 'react'
 import TableContext from '../context/TableContext/TableContext'
 import Spinner from '../layout/Spinner/Spinner'
-import {Sparklines, SparklinesLine} from 'react-sparklines';
+import {Sparklines, SparklinesLine, SparklinesSpots} from 'react-sparklines';
 import TableFunctions from '../../functions/table functions/TableFunctions'
 import {Link} from 'react-router-dom'
 import useSortableData from './useSortableData'
@@ -27,37 +27,37 @@ const Table = () => {
              <table className='table table--primary'>
                 <thead className='table__head'>
                     <tr>
-                        <th className='table__headcol'>
+                        <th className='table__headcol table__headcol--rank'>
                             <button style={{width: '100%'}} onClick={() => {requestSort('rank')}} >
                              #
                             </button>
                         </th>
-                        <th className='table__headcol'>
+                        <th className='table__headcol table__headcol--name'>
                             <button style={{width: '100%'}} onClick={() => {requestSort('name')}}>
                                 NAME
                             </button>
                         </th>
-                        <th className='table__headcol'>
+                        <th className='table__headcol table__headcol--pricechange24h'>
                             <button style={{width: '100%'}} onClick={() => {requestSort('priceChange1d')}}>
                                 24H CHANGE
                             </button>
                         </th>
-                        <th className='table__headcol'>
-                            <button style={{width: '100%'}} onClick={() => {requestSort('priceBtc')}}>
+                        <th className='table__headcol table__headcol--price'>
+                            <button style={{width: '100%'}} onClick={() => {requestSort('price')}}>
                                 PRICE
                             </button>
                         </th>
-                        <th className='table__headcol'>
+                        <th className='table__headcol table__headcol--priceinbtc'>
                             <button style={{width: '100%'}} onClick={() => {requestSort('priceBtc')}}>
                                 PRICE IN BTC
                             </button>
                         </th>
-                        <th className='table__headcol'>
+                        <th className='table__headcol table__headcol--volume'>
                             <button style={{width: '100%'}} onClick={() => {requestSort('volume')}}>
                                 24H VOLUME
                             </button>
                         </th>
-                        <th className='table__headcol'>
+                        <th className='table__headcol table__headcol--sparkline'>
                             PRICE 7D
                         </th>
                     </tr>
@@ -66,7 +66,7 @@ const Table = () => {
                     {items.map((item, i) => {
                             const {rank, price, icon, id, volume, symbol, name, priceChange1d, priceBtc, sparklinedata, priceChange7d_CG_USD, priceChange1w} = item;
                             return <tr>
-                            <td className='tablebody__data'>{rank}</td>
+                            <td className='tablebody__data tablebody__data--rank'>{rank}</td>
                             <td className='tablebody__data tablebody__data--name'>
                                     <Link style={{textDecoration: 'none', margin: '0px', padding: '0px'}} to={setLinkParamByID(id)}>
                                 <div className='table_'>
@@ -76,12 +76,12 @@ const Table = () => {
                                 </div>
                                 </Link>
                             </td>
-                            <td className='tablebody__data' style={setPriceColor(priceChange1d)}>{addDirectionalTriangle(priceChange1d)}{priceChange1d}%</td>
-                            <td className='tablebody__data'>${newPrice(price)}</td>
-                            <td className='tablebody__data'>{priceBtc}</td>
-                            <td className='tablebody__data'>{newVol(volume)}</td>
+                            <td className='tablebody__data tablebody__data--pricechange24h' style={setPriceColor(priceChange1d)}>{addDirectionalTriangle(priceChange1d)}{priceChange1d}%</td>
+                            <td className='tablebody__data tablebody__data--price'>${newPrice(price)}</td>
+                            <td className='tablebody__data tablebody__data--priceinbtc'>{priceBtc}</td>
+                            <td className='tablebody__data tablebody__data--volume'>{newVol(volume)}</td>
                             
-                            <td className='tablebody__data'>
+                            <td className='tablebody__data tablebody__data--sparkline'>
                                 <Link style={{textDecoration: 'none', margin: '0px', padding: '0px'}} to={setLinkParamByID(id)}>
                                     <Sparklines data={sparklinedata} width={250} height={100}>
                                         <SparklinesLine style={{fill: 'none'}} color={setSparklineColor(priceChange1w)} />
