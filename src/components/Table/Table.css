@@ -6,6 +6,29 @@
 }
 
 .table--primary {
-    width: 50%;
+    width: 60%;
+    border-collapse: collapse;
 }
 
+.table__headcol {
+    margin: 0px;
+    padding: 0px;
+}
+
+.tablebody__data {
+    text-align: center;
+}
+
+.tablebody__data:nth-child(2) {
+    text-align: none;
+}
+
+td button.ascending::after {
+    content: '👇';
+    margin-left: 1em;
+}
+
+.tablebody__data.descending::after {
+    content: '☝️';
+    margin-left: 1em;
+  }

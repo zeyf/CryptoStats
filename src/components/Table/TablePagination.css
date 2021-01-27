@@ -1,0 +1,12 @@
+.paginationul__button {
+    height: 3vh;
+    width: 3vh;
+    transition: 0.4s;
+    border: 1px solid #4141bf;
+    border-radius: 5px;
+}
+
+.paginationul__button:hover {
+    background-color: #4141bf;
+    border: 1px solid
+}

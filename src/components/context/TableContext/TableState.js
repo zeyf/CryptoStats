@@ -34,10 +34,29 @@ const TableState = ({children}) => {
                 return (limit * currentPage)
             }
         }
-        const response = await axios.get(`https://api.coinstats.app/public/v1/coins?skip=${skip()}&limit=${limit}&currency=USD`)
+        const CoinStatsResponse = await axios.get(`https://api.coinstats.app/public/v1/coins?skip=${skip()}&limit=${limit}&currency=USD`)
+        const CoinStatsData = CoinStatsResponse.data.coins
+        
+        const CoinGeckoSparkline7DDataResponse = await axios.get(
+            `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${perPage}&page=${currentPage}&sparkline=true&price_change_percentage=7d`
+            );
+
+        const SparklinesForCurrent = CoinGeckoSparkline7DDataResponse.data.map((crypto, i) => {
+            return crypto.sparkline_in_7d
+        })
+        const CoinGecko7dChange = CoinGeckoSparkline7DDataResponse.data.map((crypto, i) => {
+            return crypto.price_change_percentage_7d_in_currency
+        })
+
+        const CombinedData = CoinStatsData.map((crypto, i) => {
+            crypto.sparklinedata = SparklinesForCurrent[i].price;
+            crypto.priceChange7d_CG_USD = CoinGecko7dChange[i];
+            return crypto
+        })
+
         dispatch({
             type: GET_CRYPTOS,
-            payload: response.data.coins
+            payload: CombinedData
         })
     }
 

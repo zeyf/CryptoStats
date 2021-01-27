@@ -31,6 +31,15 @@ const TableFunctions = {
         } else if (Math.sign(priceChange) === 0) {
             return;
         }
+    },
+    setSparklineColor: (weeklyChange) => {
+        if (Math.sign(weeklyChange) === 1) {
+            return '#23a455'
+        } else if (Math.sign(weeklyChange) === -1) {
+            return 'red'
+        } else if (Math.sign(weeklyChange) === 0) {
+            return 'black'
+        }
     }
 }
 export default TableFunctions;
