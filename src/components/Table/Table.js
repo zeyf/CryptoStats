@@ -6,13 +6,14 @@ import TableFunctions from '../../functions/table functions/TableFunctions'
 import {Link} from 'react-router-dom'
 import useSortableData from './useSortableData'
 import TablePagination from './TablePagination'
+import './Table.css'
 
 const Table = () => {
 
     // UPPERCASE ONLY = STATE VALUES | NON UPPERCASE = FUNCTIONS //
     const {LOADING, CRYPTOS, SORTEDFIELD, CURRENTPAGE, POSTSPERPAGE, GetCryptos, setSortField} = useContext(TableContext);
     // "OUTSOURCING" functions on style and manipulation of general data representation for table data to keep a clean component
-    const {newVol, newPrice, setPriceColor, setLinkParamByID} = TableFunctions;
+    const {newVol, newPrice, setPriceColor, setLinkParamByID, addDirectionalTriangle} = TableFunctions;
 
     useEffect(() => {
         GetCryptos(CURRENTPAGE, POSTSPERPAGE);
@@ -21,10 +22,10 @@ const Table = () => {
 
     const { items, requestSort } = useSortableData(CRYPTOS);
     return (
-        <div>
+        <div className='tablecomponent tablecomponent--primary'>
             {LOADING ? <Spinner /> :<>
-             <table>
-                <thead>
+             <table className='table table--primary'>
+                <thead className='table__head'>
                     <tr>
                         <th><button style={{width: '100%'}} onClick={() => {requestSort('rank')}} >
                              #
@@ -41,7 +42,7 @@ const Table = () => {
                             </button>
                         </th>
                         <th>
-                            <button style={{width: '100%'}} onClick={() => {requestSort('price')}}>
+                            <button style={{width: '100%'}} onClick={() => {requestSort('priceBtc')}}>
                                 PRICE
                             </button>
                         </th>
@@ -55,23 +56,28 @@ const Table = () => {
                                 24H VOLUME
                             </button>
                         </th>
+                        <th>
+                            PRICE 7D
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     {items.map((item, i) => {
+                            const {rank, price, icon, id, volume, symbol, name, priceChange1d, priceBtc} = item;
                             return <tr>
-                            <td>{item.rank}</td>
+                            <td>{rank}</td>
                             <td>
-                                <Link style={{textDecoration: 'none', margin: '0px', padding: '0px'}} to={setLinkParamByID(item.id)}>
-                                    <img src={item.icon} style={{height: '20px', width: '20px'}} />
-                                    {item.name}
-                                    {` • ${item.symbol}`}
+                                <Link style={{textDecoration: 'none', margin: '0px', padding: '0px'}} to={setLinkParamByID(id)}>
+                                    <img src={icon} style={{height: '20px', width: '20px'}} />
+                                    {name}
+                                    {` • ${symbol}`}
                                 </Link>
                             </td>
-                            <td style={setPriceColor(item.priceChange1d)}>{item.priceChange1d}</td>
-                            <td>{newPrice(item.price)}</td>
-                            <td>{item.priceBtc}</td>
-                            <td>{newVol(item.volume)}</td>
+                            <td style={setPriceColor(priceChange1d)}>{addDirectionalTriangle(priceChange1d)}{priceChange1d}%</td>
+                            <td>{newPrice(price)}</td>
+                            <td>{priceBtc}</td>
+                            <td>{newVol(volume)}</td>
+
                         </tr>
                     })}
                 </tbody>

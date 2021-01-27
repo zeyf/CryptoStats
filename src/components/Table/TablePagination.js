@@ -9,10 +9,10 @@ const TablePagination = () => {
         PageNumbers.push(i)
     }
     return (
-        <div>
-            <ul>
+        <div className='pagination pagination--primary'>
+            <ul className='paginationul paginationul--primary'>
                 {PageNumbers.map((item, i) => {
-                    return <button onClick={() => {
+                    return <button className='paginationul__button' onClick={() => {
                         setCurrentPage(item, POSTSPERPAGE)
                     }}>
                                 {item}
