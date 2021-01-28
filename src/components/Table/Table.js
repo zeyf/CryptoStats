@@ -4,6 +4,7 @@ import Loader from '../layout/Loader/Loader'
 import {Sparklines, SparklinesLine, SparklinesSpots} from 'react-sparklines';
 import TableFunctions from '../../functions/table functions/TableFunctions'
 import {Link} from 'react-router-dom'
+import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
 import useSortableData from './useSortableData'
 import TablePagination from './TablePagination'
 import './Table.css'
@@ -21,9 +22,42 @@ const Table = () => {
     }, [])
 
     const { items, requestSort } = useSortableData(CRYPTOS);
+
+    const SkeletonType = (type) => {
+        if (type === 'rank') {
+            return <SkeletonTheme color='#cececf'>
+                <Skeleton circle={true} width={20} height={20}count={1}/>
+                </SkeletonTheme>
+        } else if (type === 'icon') {
+            return <SkeletonTheme color='#cececf'>
+                <Skeleton circle={true} width={20} height={20}count={1}/>
+                </SkeletonTheme>
+        } else if (type === 'name') {
+            return <SkeletonTheme color='#cececf'>
+                <Skeleton  width={225} height={20}count={1}/>
+                </SkeletonTheme>
+        } else if (type === 'price') {
+            return <SkeletonTheme color='#cececf'>
+                <Skeleton width={50} height={20}count={1}/>
+                </SkeletonTheme>
+        } else if (type === 'priceChange1d') {
+            return <SkeletonTheme color='#cececf'>
+                <Skeleton width={50} height={20}count={1}/>
+                </SkeletonTheme>
+        } else if (type === '24hvolume') {
+            return <SkeletonTheme color='#cececf'>
+                <Skeleton width={50} height={20}count={1}/>
+                </SkeletonTheme>
+        } else if (type === 'sparklinesvg') {
+            return <SkeletonTheme color='#cececf'>
+                <Skeleton width={150} height={50}count={1}/>
+                </SkeletonTheme>
+        }
+    }
+    
     return (
         <div className='tablecomponent tablecomponent--primary'>
-            {LOADING ? <Loader /> :<>
+            <>
              <table className='table table--primary'>
                 <thead className='table__head'>
                     <tr className='table__head__row'>
@@ -61,26 +95,26 @@ const Table = () => {
                     {items.map((item, i) => {
                             const {rank, price, icon, id, volume, symbol, name, priceChange1d, priceBtc, sparklinedata, priceChange7d_CG_USD, priceChange1w} = item;
                             return <tr className='table__row'>
-                            <td className='tablebody__data tablebody__data--rank'>{rank}</td>
+                            <td className='tablebody__data tablebody__data--rank'>{LOADING ?  SkeletonType('rank'): rank}</td>
                             <td className='tablebody__data tablebody__data--name'>
                                     <Link style={{textDecoration: 'none', margin: '0px', padding: '0px'}} to={setLinkParamByID(id)}>
                                 <div className='table_'>
-                                        <img src={icon} className='tablebody__nameimage' style={{height: '20px', width: '20px'}} />
-                                    <p className='s'>{name}<span>{` • ${symbol}`}</span></p>
+                                        {LOADING ? <span style={{margin: '0px 10px'}}>{SkeletonType('icon')}</span> : <img src={icon} className='tablebody__nameimage' style={{height: '20px', width: '20px'}} />}
+                                    <p className='s'>{LOADING ? SkeletonType('name') :`${name} • ${symbol}`}</p>
                                     
                                 </div>
                                 </Link>
                             </td>
-                            <td className='tablebody__data tablebody__data--pricechange24h' style={setPriceColor(priceChange1d)}>{addDirectionalTriangle(priceChange1d)}{priceChange1d}%</td>
-                            <td className='tablebody__data tablebody__data--price'>${newPrice(price)}</td>
-                            <td className='tablebody__data tablebody__data--volume'>{newVol(volume)}</td>
+                            <td className='tablebody__data tablebody__data--pricechange24h' style={setPriceColor(priceChange1d)}>{LOADING ? SkeletonType('priceChange1d'): `${addDirectionalTriangle(priceChange1d)}${priceChange1d}%`}</td>
+                            <td className='tablebody__data tablebody__data--price'>{LOADING ? SkeletonType('price') : `$${newPrice(price)}`}</td>
+                            <td className='tablebody__data tablebody__data--volume'>{LOADING ? SkeletonType('24hvolume') : `${newVol(volume)}`}</td>
                             
                             <td className='tablebody__data tablebody__data--sparkline'>
-                                <Link style={{textDecoration: 'none', margin: '0px', padding: '0px'}} to={setLinkParamByID(id)}>
+                                {LOADING ? SkeletonType('sparklinesvg'): <Link style={{textDecoration: 'none', margin: '0px', padding: '0px'}} to={setLinkParamByID(id)}>
                                     <Sparklines data={sparklinedata} width={250} height={100}>
-                                        <SparklinesLine style={{fill: 'none'}} color={setSparklineColor(priceChange1w)} />
+                                        <SparklinesLine style={{fill: 'none'}} color={setSparklineColor(priceChange7d_CG_USD)} />
                                     </Sparklines>
-                                </Link>
+                                </Link>}
                             </td>
                         </tr>
                 
@@ -88,7 +122,7 @@ const Table = () => {
                 </tbody>
                 </table>
             </>
-                }
+                
             <TablePagination />
         </div>
     )
