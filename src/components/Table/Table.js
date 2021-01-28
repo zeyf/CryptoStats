@@ -12,7 +12,7 @@ import './Table.css'
 const Table = () => {
 
     // UPPERCASE ONLY = STATE VALUES | NON UPPERCASE = FUNCTIONS //
-    const {LOADING, CRYPTOS, SORTEDFIELD, CURRENTPAGE, POSTSPERPAGE, GetCryptos, setSortField} = useContext(TableContext);
+    const {LOADING, CRYPTOS, INITIALLOADING, CURRENTPAGE, POSTSPERPAGE, GetCryptos} = useContext(TableContext);
     // "OUTSOURCING" functions on style and manipulation of general data representation for table data to keep a clean component
     const {newVol, newPrice, setPriceColor, setLinkParamByID, addDirectionalTriangle, setSparklineColor} = TableFunctions;
 
@@ -54,7 +54,7 @@ const Table = () => {
                 </SkeletonTheme>
         }
     }
-    
+
     return (
         <div className='tablecomponent tablecomponent--primary'>
             <>
@@ -99,7 +99,7 @@ const Table = () => {
                             <td className='tablebody__data tablebody__data--name'>
                                     <Link style={{textDecoration: 'none', margin: '0px', padding: '0px'}} to={setLinkParamByID(id)}>
                                 <div className='table_'>
-                                        {LOADING ? <span style={{margin: '0px 10px'}}>{SkeletonType('icon')}</span> : <img src={icon} className='tablebody__nameimage' style={{height: '20px', width: '20px'}} />}
+                                        {LOADING ? <span style={{margin: '0px 10px'}}>{SkeletonType('icon')}</span> : <img src={icon} alt={`${name} | ${symbol} icon`} className='tablebody__nameimage' style={{height: '20px', width: '20px'}} />}
                                     <p className='s'>{LOADING ? SkeletonType('name') :`${name} • ${symbol}`}</p>
                                     
                                 </div>

@@ -27,10 +27,10 @@
 
 .table__row {
     border-bottom: 1px solid #cececf;
-    transition: 0.3s;
+    transition: 0.1s;
 }
 .table__row:hover {
-    background-color: rgb(232, 232, 232);
+    background-color: rgb(227, 227, 231);
 }
 
 .table__headcol__button {
@@ -42,6 +42,9 @@
     padding: 10px 0px;
     cursor: pointer;
     outline: none;
+}
+.table__headcol__button:hover {
+    background-color: rgb(238, 238, 238);
 }
 
 .table__headcol--sparkline {

@@ -1,9 +1,9 @@
 import TableContext from '../context/TableContext/TableContext'
-import React, {useEffect, useContext} from 'react'
+import React, {useContext} from 'react'
 import './TablePagination.css'
 
 const TablePagination = () => {
-    const {CURRENTPAGE, POSTSPERPAGE, LOADING, setCurrentPage, GetCryptos} = useContext(TableContext);
+    const {CURRENTPAGE, POSTSPERPAGE, setCurrentPage} = useContext(TableContext);
     const totalPages = 21; // total pages + 1
     const PageNumbers = [];
     for (let i=1; i < totalPages; i++) {

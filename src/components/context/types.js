@@ -11,3 +11,7 @@ export const GET_CRYPTOS = 'GET_CRYPTOS';
 // FOR SPECIFIC CRYPTO
 
 export const SET_CRYPTO = 'GET_CRYPTO';
+
+// for Initial Load for Skeleton
+
+export const SET_INITIAL_LOADING  = 'SET_INITIAL_LOADING'

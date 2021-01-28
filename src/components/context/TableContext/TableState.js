@@ -6,7 +6,8 @@ import {
     SET_LOADING, 
     GET_CRYPTOS, 
     SET_SORTED_FIELD,
-    SET_CURRENT_PAGE
+    SET_CURRENT_PAGE,
+    SET_INITIAL_LOADING
 } from '../types';
 
 const TableState = ({children}) => {
@@ -15,7 +16,8 @@ const TableState = ({children}) => {
         LOADING: false,
         SORTEDFIELD: null,
         CURRENTPAGE: 1,
-        POSTSPERPAGE: 25
+        POSTSPERPAGE: 25,
+        INITIALLOADING: false
     }
 
     const [state, dispatch] = useReducer(TableReducer, InitialState);
@@ -25,6 +27,7 @@ const TableState = ({children}) => {
     }
 
     const GetCryptos = async (currentPage, perPage) => {
+        SetInitialLoading(true);
         SetLoading();
         const limit = perPage;
         const skip = () => {
@@ -75,12 +78,22 @@ const TableState = ({children}) => {
         GetCryptos(currentPage, perPage);
     }
 
+    const SetInitialLoading = (status) => {
+        if (status === true) {
+            dispatch({
+                type: SET_INITIAL_LOADING,
+                payload: status
+            })
+        }
+    }
+
     return <TableContext.Provider value={{
             CRYPTOS: state.CRYPTOS,
             LOADING: state.LOADING,
             SORTEDFIELD: state.SORTEDFIELD,
             CURRENTPAGE: state.CURRENTPAGE,
             POSTSPERPAGE: state.POSTSPERPAGE,
+            INITIALLOADING: state.INITIALLOADING,
             GetCryptos,
             setSortField,
             setCurrentPage

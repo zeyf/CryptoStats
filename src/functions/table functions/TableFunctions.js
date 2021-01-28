@@ -30,7 +30,6 @@ const TableFunctions = {
             }
         }
         if (commaregex.test(newVol)) {
-            const VolSplit = newVol.split(commaregex)
             const Abbreviation = () => {
                 if (newVol.match(commaregex).length > 0) {
                     const CommaCount = newVol.match(commaregex).length;

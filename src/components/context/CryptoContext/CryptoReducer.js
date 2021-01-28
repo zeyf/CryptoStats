@@ -16,6 +16,7 @@ const CryptoReducer = (state, action) => {
                 LOADING: true
             }
     }
+
 }
 
 export default CryptoReducer;
