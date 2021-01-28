@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navbar from './components/layout/Navbar/Navbar';
 import Table from './components/Table/Table'
 import Crypto from './components/Crypto/Crypto'
+import CryptoState from './components/context/CryptoContext/CryptoState'
 
 const App = () => {
 
@@ -15,7 +16,9 @@ const App = () => {
           <Switch>
             <Route exact path='/' component={Table} />
             <Route exact path='/cryptocurrencies' component={Table} />
-            <Route exact path='/cryptocurrencies/:cryptoname' component={Crypto} />
+            <CryptoState>
+              <Route exact path='/cryptocurrencies/:CryptoID' component={Crypto} />
+            </CryptoState>
           </Switch>
         </Router>
       </TableState>

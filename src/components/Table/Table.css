@@ -3,12 +3,17 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-
 }
 
 .table--primary {
     width: 60%;
     border-collapse: collapse;
+    margin: 10px 0px;
+}
+
+.table__head__row {
+    border-bottom: 1px solid #cececf;
+    border-top: 1px solid #cececf;
 }
 
 .table__headcol {
@@ -20,7 +25,44 @@
     text-align: center;
 }
 
+.table__row {
+    border-bottom: 1px solid #cececf;
+    transition: 0.3s;
+}
+.table__row:hover {
+    background-color: rgb(232, 232, 232);
+}
 
+.table__headcol__button {
+    border: 1px solid transparent;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.85em;
+    font-weight: 500;
+    color: #b0b0b1;
+    padding: 10px 0px;
+    cursor: pointer;
+    outline: none;
+}
+
+.table__headcol--sparkline {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.85em;
+    font-weight: 500;
+    color: #b0b0b1;
+}
+
+.table_ {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tablebody__nameimage {
+    margin: 0px 10px;
+}
+.s {
+    padding: 0px 0px 0px 0px;
+}
 
 @media only screen and (max-width: 600px) {
 
@@ -28,6 +70,7 @@
     .table--primary {
         width: 100%;
         border-collapse: collapse;
+        padding: 0px 10px;
     }
 
     .tablebody__data--pricechange24h {
