@@ -1,6 +1,5 @@
 import React, {useEffect, useContext} from 'react'
 import TableContext from '../context/TableContext/TableContext'
-import Loader from '../layout/Loader/Loader'
 import {Sparklines, SparklinesLine, SparklinesSpots} from 'react-sparklines';
 import TableFunctions from '../../functions/table functions/TableFunctions'
 import {Link} from 'react-router-dom'
@@ -8,6 +7,7 @@ import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
 import useSortableData from './useSortableData'
 import TablePagination from './TablePagination'
 import './Table.css'
+import TableSkeleton from './TableSkeleton'
 
 const Table = () => {
 
@@ -56,8 +56,9 @@ const Table = () => {
     }
 
     return (
+        
         <div className='tablecomponent tablecomponent--primary'>
-            <>
+            {!INITIALLOADING ? <TableSkeleton /> : <>
              <table className='table table--primary'>
                 <thead className='table__head'>
                     <tr className='table__head__row'>
@@ -121,7 +122,7 @@ const Table = () => {
                     })}
                 </tbody>
                 </table>
-            </>
+            </>}
                 
             <TablePagination />
         </div>

@@ -27,7 +27,7 @@ const TableState = ({children}) => {
     }
 
     const GetCryptos = async (currentPage, perPage) => {
-        SetInitialLoading(true);
+        SetInitialLoading(false);
         SetLoading();
         const limit = perPage;
         const skip = () => {
@@ -61,6 +61,7 @@ const TableState = ({children}) => {
             type: GET_CRYPTOS,
             payload: CombinedData
         })
+        SetInitialLoading(true);
     }
 
     const setSortField = (field) => {
@@ -79,10 +80,15 @@ const TableState = ({children}) => {
     }
 
     const SetInitialLoading = (status) => {
-        if (status === true) {
+        if (status === false) {
             dispatch({
                 type: SET_INITIAL_LOADING,
-                payload: status
+                payload: false
+            })
+        } else {
+            dispatch({
+                type: SET_INITIAL_LOADING,
+                payload: true
             })
         }
     }
