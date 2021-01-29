@@ -7,7 +7,8 @@ import {
     GET_CRYPTOS, 
     SET_SORTED_FIELD,
     SET_CURRENT_PAGE,
-    SET_INITIAL_LOADING
+    SET_INITIAL_LOADING,
+    SET_ROWS_PER_PAGE
 } from '../types';
 
 const TableState = ({children}) => {
@@ -16,7 +17,7 @@ const TableState = ({children}) => {
         LOADING: false,
         SORTEDFIELD: null,
         CURRENTPAGE: 1,
-        POSTSPERPAGE: 20,
+        ROWSPERPAGE: 20,
         INITIALLOADING: false
     }
 
@@ -84,6 +85,13 @@ const TableState = ({children}) => {
         GetCryptos(currentPage, perPage);
     }
 
+    const setRowsPerPage = (perPage) => {
+        dispatch({
+            type: SET_ROWS_PER_PAGE,
+            payload: perPage
+        })
+    }
+
     const SetInitialLoading = (status) => {
         if (status === false) {
             dispatch({
@@ -103,11 +111,12 @@ const TableState = ({children}) => {
             LOADING: state.LOADING,
             SORTEDFIELD: state.SORTEDFIELD,
             CURRENTPAGE: state.CURRENTPAGE,
-            POSTSPERPAGE: state.POSTSPERPAGE,
+            ROWSPERPAGE: state.ROWSPERPAGE,
             INITIALLOADING: state.INITIALLOADING,
             GetCryptos,
             setSortField,
-            setCurrentPage
+            setCurrentPage,
+            setRowsPerPage
             }}>
                 {children}
             </TableContext.Provider>

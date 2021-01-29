@@ -9,12 +9,12 @@ import TableContext from '../context/TableContext/TableContext'
 const TableSkeleton = () => {
     
 
-    const { POSTSPERPAGE } = useContext(TableContext);
+    const { ROWSPERPAGE } = useContext(TableContext);
     //default postsperpage is 25. now it will be able to adjusted based posts per page.
 
     const DefaultCount = () => {
         const RowList=[]
-        for (let i=1; i < (POSTSPERPAGE + 1); i++) {
+        for (let i=1; i < (ROWSPERPAGE + 1); i++) {
             RowList.push(i)
         }
         return RowList

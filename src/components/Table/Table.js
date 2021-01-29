@@ -12,12 +12,12 @@ import TableSkeleton from './TableSkeleton'
 const Table = () => {
 
     // UPPERCASE ONLY = STATE VALUES | NON UPPERCASE = FUNCTIONS //
-    const {LOADING, CRYPTOS, INITIALLOADING, CURRENTPAGE, POSTSPERPAGE, GetCryptos} = useContext(TableContext);
+    const {LOADING, CRYPTOS, INITIALLOADING, CURRENTPAGE, ROWSPERPAGE, GetCryptos} = useContext(TableContext);
     // "OUTSOURCING" functions on style and manipulation of general data representation for table data to keep a clean component
     const {newVol, newPrice, setPriceColor, setLinkParamByID, addDirectionalTriangle, setSparklineColor, format1DpriceChange} = TableFunctions;
 
     useEffect(() => {
-        GetCryptos(CURRENTPAGE, POSTSPERPAGE);
+        GetCryptos(CURRENTPAGE, ROWSPERPAGE);
         //eslint-disable-next-line
     }, [])
 
@@ -58,7 +58,7 @@ const Table = () => {
     return (
         
         <div className='tablecomponent tablecomponent--primary'>
-            <TablePagination />
+            <TablePagination ShowRowsPerPage='NO' />
             {!INITIALLOADING ? <TableSkeleton /> : <>
              <table className='table table--primary'>
                 <thead className='table__head'>
@@ -124,7 +124,7 @@ const Table = () => {
                 </tbody>
                 </table>
             </>}
-            <TablePagination />
+            <TablePagination ShowRowsPerPage='YES' />
         </div>
     )
 }

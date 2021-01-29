@@ -3,7 +3,8 @@ import {
     GET_CRYPTOS, 
     SET_SORTED_FIELD,
     SET_CURRENT_PAGE,
-    SET_INITIAL_LOADING
+    SET_INITIAL_LOADING,
+    SET_ROWS_PER_PAGE
 } from '../types';
 
 // consider adding set post per page to allow user to change it
@@ -37,6 +38,11 @@ const TableReducer = (state, action) => {
             return {
                 ...state,
                 INITIALLOADING: action.payload
+            }
+        case SET_ROWS_PER_PAGE:
+            return {
+                ...state,
+                ROWSPERPAGE: action.payload
             }
     }
 }

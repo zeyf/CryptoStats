@@ -2,7 +2,6 @@ export const SET_LOADING = 'SET_LOADING';
 
 export const SET_SORTED_FIELD = 'SET_SORTED_FIELD';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-export const SET_POST_PER_PAGE = 'SET_POST_PER_PAGE';
 
 // FOR CURRENT PAGE OF CRYPTOS (DEFAULT IS PAGE 1
 
@@ -15,3 +14,7 @@ export const SET_CRYPTO = 'GET_CRYPTO';
 // for Initial Load for Skeleton
 
 export const SET_INITIAL_LOADING  = 'SET_INITIAL_LOADING'
+
+// ALTER THE AMOUNTS OF POSTS PER PAGE
+
+export const SET_ROWS_PER_PAGE  = 'SET_ROWS_PER_PAGE'
