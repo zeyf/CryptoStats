@@ -4,24 +4,19 @@ import './TablePagination.css'
 
 const TablePagination = () => {
     const {CURRENTPAGE, POSTSPERPAGE, setCurrentPage} = useContext(TableContext);
-    const totalPages = 21; // total pages + 1
+    const totalPages = (500/POSTSPERPAGE);
     const PageNumbers = [];
-    for (let i=1; i < totalPages; i++) {
+    for (let i=1; i < (totalPages + 1); i++) {
         PageNumbers.push(i)
     }
 
-    const BackLimit = () => {
-        if (CURRENTPAGE === 1) {
-            return;
-        } else {
-            return PageNumbers[CURRENTPAGE - 1]
-        }
-    }
     return (
         <div className='pagination pagination--primary'>
             <ul className='paginationul paginationul--primary'>
                 <button className='paginationul_button' onClick={() => {
-                    /* setCurrentPage(BackLimit(), POSTSPERPAGE) */
+                    if (CURRENTPAGE !== 1) {
+                        setCurrentPage(PageNumbers[CURRENTPAGE - 2], POSTSPERPAGE)
+                    }
                 }}>
                     {`<`}
                 </button>
@@ -29,11 +24,13 @@ const TablePagination = () => {
                     return <button className='paginationul__button' onClick={() => {
                         setCurrentPage(item, POSTSPERPAGE)
                     }}>
-                                {item}
-                            </button>
+                            {item}
+                        </button>
                 })}
                 <button className='paginationul_button' onClick={() => {
-                    /* setCurrentPage(PageNumbers[CURRENTPAGE], POSTSPERPAGE) */
+                    if (CURRENTPAGE !== totalPages) {
+                        setCurrentPage(PageNumbers[CURRENTPAGE], POSTSPERPAGE)
+                    }
                 }}>
                     {`>`}
                 </button>

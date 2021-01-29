@@ -1,12 +1,15 @@
 .navbar--primary {
-    background-color: #fdb827;
+    background-color: #16c79a;
     height: 10vh;
     width: 100%;
+    border-bottom: 10px solid #11698e;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 @media only screen and (max-width: 600px) {
 
-   .navbar--primary {
-    
-   }
+
 }
