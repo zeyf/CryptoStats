@@ -16,7 +16,7 @@ const TableState = ({children}) => {
         LOADING: false,
         SORTEDFIELD: null,
         CURRENTPAGE: 1,
-        POSTSPERPAGE: 25,
+        POSTSPERPAGE: 20,
         INITIALLOADING: false
     }
 

@@ -14,7 +14,7 @@ const Table = () => {
     // UPPERCASE ONLY = STATE VALUES | NON UPPERCASE = FUNCTIONS //
     const {LOADING, CRYPTOS, INITIALLOADING, CURRENTPAGE, POSTSPERPAGE, GetCryptos} = useContext(TableContext);
     // "OUTSOURCING" functions on style and manipulation of general data representation for table data to keep a clean component
-    const {newVol, newPrice, setPriceColor, setLinkParamByID, addDirectionalTriangle, setSparklineColor} = TableFunctions;
+    const {newVol, newPrice, setPriceColor, setLinkParamByID, addDirectionalTriangle, setSparklineColor, format1DpriceChange} = TableFunctions;
 
     useEffect(() => {
         GetCryptos(CURRENTPAGE, POSTSPERPAGE);
@@ -107,7 +107,7 @@ const Table = () => {
                                 </div>
                                 </Link>
                             </td>
-                            <td className='tablebody__data tablebody__data--pricechange24h' style={setPriceColor(priceChange1d)}>{LOADING ? SkeletonType('priceChange1d'): `${addDirectionalTriangle(priceChange1d)}${priceChange1d}%`}</td>
+                            <td className='tablebody__data tablebody__data--pricechange24h' style={setPriceColor(priceChange1d)}>{LOADING ? SkeletonType('priceChange1d'): `${addDirectionalTriangle(priceChange1d)}${format1DpriceChange(priceChange1d)}%`}</td>
                             <td className='tablebody__data tablebody__data--price'>{LOADING ? SkeletonType('price') : `$${newPrice(price)}`}</td>
                             <td className='tablebody__data tablebody__data--volume'>{LOADING ? SkeletonType('24hvolume') : `${newVol(volume)}`}</td>
                             

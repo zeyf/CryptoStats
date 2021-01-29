@@ -9,7 +9,9 @@ const TableFunctions = {
         const formattednewVol = () => {
             if (String(newVol).match(numberregex)) {
                 const newVolNumSplit = newVol.replaceAll(commaregex, '').split('');
-                if (VolNumCount === 11) {
+                if (VolNumCount === 12) {
+                    return `${newVolNumSplit[0]}${newVolNumSplit[1]}${newVolNumSplit[2]}.${newVolNumSplit[3]}${newVolNumSplit[4]}`
+                } else if (VolNumCount === 11) {
                     return `${newVolNumSplit[0]}${newVolNumSplit[1]}.${newVolNumSplit[2]}${newVolNumSplit[3]}`
                 } else if (VolNumCount === 10) {
                     return `${newVolNumSplit[0]}.${newVolNumSplit[1]}${newVolNumSplit[2]}`
@@ -70,8 +72,11 @@ const TableFunctions = {
         } else if (Math.sign(priceChange) === -1) {
             return '▾'
         } else if (Math.sign(priceChange) === 0) {
-            return;
+            return '';
         }
+    },
+    format1DpriceChange: (priceChange) => {
+        return priceChange.toFixed(2)
     },
     setSparklineColor: (weeklyChange) => {
         if (Math.sign(weeklyChange) === 1) {

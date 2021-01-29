@@ -44,7 +44,7 @@
     outline: none;
 }
 .table__headcol__button:hover {
-    background-color: rgb(238, 238, 238);
+    background-color: rgb(227, 227, 231);
 }
 
 .table__headcol--sparkline {
