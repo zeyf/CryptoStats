@@ -28,7 +28,7 @@ const TableState = ({children}) => {
     }
 
     const GetCryptos = async (currentPage, perPage) => {
-        if(currentPage === 1) {
+        if(currentPage === 1 && perPage === 20) {
             SetInitialLoading(false);
         }
         SetLoading();
@@ -65,7 +65,7 @@ const TableState = ({children}) => {
             payload: CombinedData
         })
 
-        if(currentPage === 1) {
+        if(currentPage === 1 && perPage === 20) {
             SetInitialLoading(true);
         }
     }
