@@ -10,27 +10,43 @@ const TablePagination = () => {
         PageNumbers.push(i)
     }
 
+    const BackButton = () => {
+        if (CURRENTPAGE !== 1) {
+            setCurrentPage(PageNumbers[CURRENTPAGE - 2], POSTSPERPAGE)
+        }
+    }
+    const NextButton = () => {
+        if (CURRENTPAGE !== totalPages) {
+            setCurrentPage(PageNumbers[CURRENTPAGE], POSTSPERPAGE)
+        }
+    }
+    const BackButtonStyle = () => {
+        if (CURRENTPAGE !== 1) {
+            return {visibility: 'visible'}
+        } else {
+            return {visibility: 'hidden'}
+        }
+
+    }
+    const NextButtonStyle = () => {
+        if (CURRENTPAGE !== totalPages) {
+            return {visibility: 'visible'}
+        } else {
+            return {visibility: 'hidden'}
+        }
+    }
+
+
     return (
         <div className='pagination pagination--primary'>
             <ul className='paginationul paginationul--primary'>
-                <button className='paginationul_button' onClick={() => {
-                    if (CURRENTPAGE !== 1) {
-                        setCurrentPage(PageNumbers[CURRENTPAGE - 2], POSTSPERPAGE)
-                    }
+                <button className='paginationul__button' style={BackButtonStyle()} onClick={() => {
+                    BackButton();
                 }}>
                     {`<`}
                 </button>
-                {PageNumbers.map((item, i) => {
-                    return <button className='paginationul__button' onClick={() => {
-                        setCurrentPage(item, POSTSPERPAGE)
-                    }}>
-                            {item}
-                        </button>
-                })}
-                <button className='paginationul_button' onClick={() => {
-                    if (CURRENTPAGE !== totalPages) {
-                        setCurrentPage(PageNumbers[CURRENTPAGE], POSTSPERPAGE)
-                    }
+                <button className='paginationul__button' style={NextButtonStyle()} onClick={() => {
+                    NextButton();
                 }}>
                     {`>`}
                 </button>

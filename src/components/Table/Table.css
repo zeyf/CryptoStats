@@ -8,7 +8,7 @@
 .table--primary {
     width: 60%;
     border-collapse: collapse;
-    margin: 10px 0px;
+    margin: 0px;
 }
 
 .table__head__row {
