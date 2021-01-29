@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="217" height="36" viewBox="0 0 217 36">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 36px;
+        opacity: 0.95;
+        fill: #fff;
+        font-family: "Fredoka One";
+      }
+    </style>
+  </defs>
+  <text id="cryptostats" class="cls-1" x="7.5" y="26.753">cryptostats</text>
+</svg>

@@ -27,7 +27,9 @@ const TableState = ({children}) => {
     }
 
     const GetCryptos = async (currentPage, perPage) => {
-        SetInitialLoading(false);
+        if(currentPage === 1) {
+            SetInitialLoading(false);
+        }
         SetLoading();
         const limit = perPage;
         const skip = () => {
@@ -61,7 +63,10 @@ const TableState = ({children}) => {
             type: GET_CRYPTOS,
             payload: CombinedData
         })
-        SetInitialLoading(true);
+
+        if(currentPage === 1) {
+            SetInitialLoading(true);
+        }
     }
 
     const setSortField = (field) => {

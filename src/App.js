@@ -5,7 +5,7 @@ import Navbar from './components/layout/Navbar/Navbar';
 import Table from './components/Table/Table'
 import Crypto from './components/Crypto/Crypto'
 import CryptoState from './components/context/CryptoContext/CryptoState'
-
+import Footer from './components/layout/Footer/Footer'
 const App = () => {
 
   return (
@@ -20,6 +20,7 @@ const App = () => {
               <Route exact path='/cryptocurrencies/:CryptoID' component={Crypto} />
             </CryptoState>
           </Switch>
+          <Footer />
         </Router>
       </TableState>
     </div>

@@ -4,10 +4,15 @@
   src: url(./fonts/Roboto-Regular.ttf);
 }
 
+@font-face {
+  font-family: Fredoka; 
+  src: url(./fonts/FredokaOne-Regular.ttf);
+}
+
 body {
   background: white;
   padding: 0px;
   margin: 0px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto';
 }
 

@@ -38,3 +38,15 @@
 .paginationul__button:hover {
     color: #13AD87;
 }
+
+@media only screen and (max-width: 600px) {
+    .pagination--primary {
+
+        width: 100%;
+    }
+    .paginationul__button {
+        height: 4.5vh;
+        width: 4.5vh;
+        font-size: 3.5em;
+    }
+}
