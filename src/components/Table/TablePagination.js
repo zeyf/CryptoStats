@@ -56,9 +56,6 @@ const TablePagination = ({ShowRowsPerPage}) => {
                         <option className='rowperpage__option'>
                             50
                         </option>
-                        <option className='rowperpage__option'>
-                            100
-                        </option>
                     </select>
                 </div>
             }

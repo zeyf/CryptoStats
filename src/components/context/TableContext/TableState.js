@@ -32,7 +32,7 @@ const TableState = ({children}) => {
             SetInitialLoading(false);
         }
         SetLoading();
-        const limit = perPage;
+/*      const limit = perPage;
         const skip = () => {
             if (limit === limit * currentPage) {
                 return 0;
@@ -40,29 +40,35 @@ const TableState = ({children}) => {
                 return (limit * currentPage) - perPage
             }
         }
-        const CoinStatsResponse = await axios.get(`https://api.coinstats.app/public/v1/coins?skip=${skip()}&limit=${limit}&currency=USD`)
-        const CoinStatsData = CoinStatsResponse.data.coins
+         const CoinStatsResponse = await axios.get(`https://api.coinstats.app/public/v1/coins?skip=${skip()}&limit=${limit}&currency=USD`)
+        const CoinStatsData = CoinStatsResponse.data.coins */
         
-        const CoinGeckoSparkline7DDataResponse = await axios.get(
+        const CoinGeckoResponse = await axios.get(
             `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${perPage}&page=${currentPage}&sparkline=true&price_change_percentage=7d`
             );
 
-        const SparklinesForCurrent = CoinGeckoSparkline7DDataResponse.data.map((crypto, i) => {
+/*         const SparklinesForCurrent = CoinGeckoResponse.data.map((crypto, i) => {
             return crypto.sparkline_in_7d
         })
-        const CoinGecko7dChange = CoinGeckoSparkline7DDataResponse.data.map((crypto, i) => {
+        const CoinGecko7dChange = CoinGeckoResponse.data.map((crypto, i) => {
             return crypto.price_change_percentage_7d_in_currency
+        })
+        console.log(CoinGeckoResponse)
+
+        const CoinGeckoIDs = CoinGeckoResponse.data.map((crypto, i) => {
+            return crypto.id
         })
 
         const CombinedData = CoinStatsData.map((crypto, i) => {
             crypto.sparklinedata = SparklinesForCurrent[i].price;
             crypto.priceChange7d_CG_USD = CoinGecko7dChange[i];
+            crypto.CGID = CoinGeckoIDs[i];
             return crypto
         })
-
+ */
         dispatch({
             type: GET_CRYPTOS,
-            payload: CombinedData
+            payload: CoinGeckoResponse.data
         })
 
         if(currentPage === 1 && perPage === 20) {

@@ -79,7 +79,7 @@ const Table = () => {
                 <thead className='table__head'>
                     <tr className='table__head__row'>
                         <th className='table__headcol table__headcol--rank'>
-                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('rank')}} >
+                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('market_cap_rank')}} >
                              #
                             </button>
                         </th>
@@ -89,17 +89,17 @@ const Table = () => {
                             </button>
                         </th>
                         <th className='table__headcol table__headcol--pricechange24h'>
-                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('priceChange1d')}}>
+                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('price_change_percentage_7d_in_currency')}}>
                                 24H CHANGE
                             </button>
                         </th>
                         <th className='table__headcol table__headcol--price'>
-                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('price')}}>
+                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('current_price')}}>
                                 PRICE
                             </button>
                         </th>
                         <th className='table__headcol table__headcol--volume'>
-                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('volume')}}>
+                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('total_volume')}}>
                                 24H VOLUME
                             </button>
                         </th>
@@ -110,27 +110,27 @@ const Table = () => {
                 </thead>
                 <tbody>
                     {items.map((item, i) => {
-                            const {rank, price, icon, id, volume, symbol, name, priceChange1d, priceBtc, sparklinedata, priceChange7d_CG_USD, priceChange1w} = item;
+                            const {market_cap_rank, current_price, image, total_volume, symbol, name, price_change_percentage_7d_in_currency, id, sparkline_in_7d, priceChange7d_CG_USD, priceChange1w} = item;
                             return <tr className='table__row'>
-                            <td className='tablebody__data tablebody__data--rank'>{LOADING ?  SkeletonType('rank'): rank}</td>
+                            <td className='tablebody__data tablebody__data--rank'>{LOADING ?  SkeletonType('rank'): market_cap_rank}</td>
                             <td className='tablebody__data tablebody__data--name'>
                                     <Link style={{textDecoration: 'none', margin: '0px', padding: '0px', color: 'black'}} to={setLinkParamByID(id)}>
                                 <div className='table_'>
-                                        {LOADING ? <span style={{margin: '0px 10px'}}>{SkeletonType('icon')}</span> : <img src={icon} alt={`${name} | ${symbol} icon`} className='tablebody__nameimage' style={{height: '20px', width: '20px'}} />}
-                                    <p className='s'>{LOADING ? SkeletonType('name') :`${nameShortener(name)} • ${symbol}`}</p>
+                                        {LOADING ? <span style={{margin: '0px 10px'}}>{SkeletonType('icon')}</span> : <img src={image} alt={`${name} | ${symbol.toUpperCase()} icon`} className='tablebody__nameimage' style={{height: '20px', width: '20px'}} />}
+                                    <p className='s'>{LOADING ? SkeletonType('name') :`${nameShortener(name)} • ${symbol.toUpperCase()}`}</p>
                                     
                                     
                                 </div>
                                 </Link>
                             </td>
-                            <td className='tablebody__data tablebody__data--pricechange24h' style={setPriceColor(priceChange1d)}>{LOADING ? SkeletonType('priceChange1d'): `${addDirectionalTriangle(priceChange1d)}${format1DpriceChange(priceChange1d)}%`}</td>
-                            <td className='tablebody__data tablebody__data--price'>{LOADING ? SkeletonType('price') : `$${newPrice(price)}`}</td>
-                            <td className='tablebody__data tablebody__data--volume'>{LOADING ? SkeletonType('24hvolume') : `${newVol(volume)}`}</td>
+                            <td className='tablebody__data tablebody__data--pricechange24h' style={setPriceColor(price_change_percentage_7d_in_currency)}>{LOADING ? SkeletonType('priceChange1d'): `${addDirectionalTriangle(price_change_percentage_7d_in_currency)}${format1DpriceChange(price_change_percentage_7d_in_currency)}%`}</td>
+                            <td className='tablebody__data tablebody__data--price'>{LOADING ? SkeletonType('price') : `$${newPrice(current_price)}`}</td>
+                            <td className='tablebody__data tablebody__data--volume'>{LOADING ? SkeletonType('24hvolume') : `${newVol(total_volume)}`}</td>
                             
                             <td className='tablebody__data tablebody__data--sparkline'>
                                 {LOADING ? SkeletonType('sparklinesvg'): <Link style={{textDecoration: 'none', margin: '0px', padding: '0px'}} to={setLinkParamByID(id)}>
-                                    <Sparklines data={sparklinedata} width={250} height={100}>
-                                        <SparklinesLine style={{fill: 'none'}} color={setSparklineColor(priceChange7d_CG_USD)} />
+                                    <Sparklines data={sparkline_in_7d.price} width={250} height={100}>
+                                        <SparklinesLine style={{fill: 'none'}} color={setSparklineColor(price_change_percentage_7d_in_currency)} />
                                     </Sparklines>
                                 </Link>}
                             </td>
@@ -139,7 +139,8 @@ const Table = () => {
                     })}
                 </tbody>
                 </table>
-            </>}
+            </>
+            }
             <TablePagination ShowRowsPerPage='YES' />
         </div>
     )

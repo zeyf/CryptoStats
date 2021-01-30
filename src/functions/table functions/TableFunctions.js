@@ -28,11 +28,10 @@ const TableFunctions = {
                 } else if (VolNumCount === 4) {
                     return `${newVolNumSplit[0]}.${newVolNumSplit[1]}${newVolNumSplit[2]}`
                 }
-
             }
         }
         if (commaregex.test(newVol)) {
-            const Abbreviation = () => {
+            const AbbreviatedVolume = () => {
                 if (newVol.match(commaregex).length > 0) {
                     const CommaCount = newVol.match(commaregex).length;
                     if (CommaCount === 3) {
@@ -41,10 +40,12 @@ const TableFunctions = {
                         return `${formattednewVol()}M`
                     } else if (CommaCount === 1) {
                         return `${formattednewVol()}TH`
+                    } else if (CommaCount === 0) {
+                        return `${formattednewVol}`
                     }
                 }
             }
-            return `$${Abbreviation()}`
+            return `$${AbbreviatedVolume()}`
         }
     },
     newPrice: (price) => {
@@ -76,7 +77,11 @@ const TableFunctions = {
         }
     },
     format1DpriceChange: (priceChange) => {
-        return priceChange.toFixed(2)
+        if (priceChange) {
+            return priceChange.toFixed(2)
+        } else {
+            return '0.00'
+        }
     },
     setSparklineColor: (weeklyChange) => {
         if (Math.sign(weeklyChange) === 1) {

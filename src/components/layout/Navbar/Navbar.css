@@ -9,6 +9,10 @@
     align-items: center;
 }
 
+.navbarlogo__link {
+    text-decoration: none;
+}
+
 .navbar__span {
     font-family: 'Fredoka';
     font-size: 3em;
