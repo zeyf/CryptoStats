@@ -1,7 +1,6 @@
 import React, {useEffect, useContext} from 'react'
-import { mockComponent } from 'react-dom/test-utils'
 import CryptoContext from '../context/CryptoContext/CryptoContext'
-import Loader from '../layout/Loader/Loader'
+import './Crypto.css'
 
 const Crypto = ({match}) => {
 
@@ -56,7 +55,7 @@ const Crypto = ({match}) => {
                         return image.small
                     }
                 } else if (type === 'symbol') {
-                    return symbol
+                    return symbol.toUpperCase();
                 } else if (type === 'market_cap_rank') {
                     return market_cap_rank
                 } else if (type === 'circulating_supply') {
@@ -75,7 +74,7 @@ const Crypto = ({match}) => {
                 } else if (type === 'categories') {
                     return categories
                 } else if (type === 'current_price') {
-                    return current_price.usd
+                    return `$${current_price.usd.toFixed(2)}`
                 } else if (type === 'marketcapChange24hr') {
                     return market_cap_change_percentage_24h_in_currency.usd;
                 } else if (type === 'priceChange1hr') {
@@ -120,17 +119,25 @@ const Crypto = ({match}) => {
         <div>
             {LOADING ? 'd' :
 
-            <>
+            <div className='cryptoinfo cryptoinfo--primary'>
                 <div className='maindetails maindetails--primary'>
-                    <img className='maindetails__image' src={ReturnCrypto('image')} />
+                        <img className='maindetails__image' src={ReturnCrypto('image')} />
+                        <h1>
+                            {ReturnCrypto('name')}
+                        </h1>
+                        <span>
+                            {ReturnCrypto('symbol')}
+                        </span>
+                    <div>
+                    <h2>
+                        {ReturnCrypto('current_price')}
+                    </h2>
+                    </div>
                 </div>
-            {ReturnCrypto('name')} |
-            {ReturnCrypto('symbol')} |
             {ReturnCrypto('market_cap_rank')} |
             {ReturnCrypto('circulating_supply')} |
             {ReturnCrypto('genesis_date')} |
             {ReturnCrypto('categories')} |
-            {ReturnCrypto('current_price')} | 
             {ReturnCrypto('marketcapChange24hr')} |
             {ReturnCrypto('priceChange1hr')} |
             {ReturnCrypto('priceChange24hr')} |
@@ -139,7 +146,7 @@ const Crypto = ({match}) => {
             {ReturnCrypto('priceChange30d')} |
             {ReturnCrypto('volume')} |
             {ReturnCrypto('total_supply')} |
-            </>
+            </div>
             }
         </div>
     )

@@ -1,5 +1,5 @@
 
-const TableFunctions = {
+const FormatFunctions = {
     newVol: (volume) => {
         const Precision = 4;
         const numberregex = /[0-9]/gi;
@@ -101,4 +101,4 @@ const TableFunctions = {
         }
     }
 }
-export default TableFunctions;
+export default FormatFunctions;

@@ -1,7 +1,7 @@
 import React, {useEffect, useContext} from 'react'
 import TableContext from '../context/TableContext/TableContext'
 import {Sparklines, SparklinesLine, SparklinesSpots} from 'react-sparklines';
-import TableFunctions from '../../functions/table functions/TableFunctions'
+import FormatFunctions from '../../functions/Formatting Functions/FormatFunctions'
 import {Link} from 'react-router-dom'
 import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
 import useSortableData from './useSortableData'
@@ -45,7 +45,7 @@ const Table = () => {
         setSparklineColor,
         format1DpriceChange,
         nameShortener
-    } = TableFunctions;
+    } = FormatFunctions;
     
     const SkeletonType = (type) => {
         if (type === 'rank') {
@@ -81,7 +81,7 @@ const Table = () => {
 
     return (
         <div className='tablecomponent tablecomponent--primary'>
-            <TablePagination ShowRowsPerPage='NO' />
+            <TablePagination ShowRowsPerPage='YES' />
             {!INITIALLOADING ? <TableSkeleton /> : <>
              <table className='table table--primary'>
                 <thead className='table__head'>

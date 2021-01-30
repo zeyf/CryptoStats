@@ -49,7 +49,7 @@ const TablePagination = ({ShowRowsPerPage}) => {
             {ShowRowsPerPage === 'YES' && 
                 <div className='rowperpage rowperpage--primary'>
                     <label className='rowsperpage__label'>Rows per page: </label>
-                    <select className='rowsperpage__select' onChange={RowPerPageonChange}>
+                    <select className='rowsperpage__select' value={ROWSPERPAGE} onChange={RowPerPageonChange}>
                         <option className='rowsperpage__option'>
                             20
                         </option>

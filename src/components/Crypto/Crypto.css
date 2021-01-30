@@ -1,0 +1,21 @@
+
+.cryptoinfo--primary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.maindetails--primary {
+    border: 1px solid;
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.maindetails__image {
+    height: 50px;
+    width: 50px;
+}

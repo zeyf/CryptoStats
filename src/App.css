@@ -9,10 +9,19 @@
   src: url(./fonts/FredokaOne-Regular.ttf);
 }
 
+@font-face {
+  font-family: Poppins-Regular; 
+  src: url(./fonts//Poppins-Regular.ttf);
+}
+
+@font-face {
+  font-family: Poppins-Semibold; 
+  src: url(./fonts/Poppins-SemiBold.ttf);
+}
+
 body {
   background: white;
   padding: 0px;
   margin: 0px;
   font-family: 'Roboto';
 }
-
