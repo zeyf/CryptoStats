@@ -1,5 +1,6 @@
 import React, {useEffect, useContext} from 'react'
 import CryptoContext from '../context/CryptoContext/CryptoContext'
+import FormatFunctions from '../../functions/Formatting Functions/FormatFunctions'
 import './Crypto.css'
 
 const Crypto = ({match}) => {
@@ -9,6 +10,16 @@ const Crypto = ({match}) => {
         useEffect(() => {
             GetCrypto(match.params.CryptoID);
         }, [])
+
+        const {
+            newVol,
+            newPrice,
+            setPriceColor,
+            addDirectionalTriangle,
+            setSparklineColor,
+            format1DpriceChange,
+            nameShortener
+        } = FormatFunctions;
 
         const ReturnCrypto = (type, subtype) => {
             if (CRYPTO) {
@@ -59,7 +70,7 @@ const Crypto = ({match}) => {
                 } else if (type === 'market_cap_rank') {
                     return market_cap_rank
                 } else if (type === 'circulating_supply') {
-                    return circulating_supply
+                    return `${Number(circulating_supply.toFixed(0)).toLocaleString('en')} ${symbol.toUpperCase()}` 
                 } else if (type === 'ath') {
                     return ath.usd
                 } else if (type === 'ath_date') {
@@ -74,7 +85,7 @@ const Crypto = ({match}) => {
                 } else if (type === 'categories') {
                     return categories
                 } else if (type === 'current_price') {
-                    return `$${current_price.usd.toFixed(2)}`
+                    return current_price.usd
                 } else if (type === 'marketcapChange24hr') {
                     return market_cap_change_percentage_24h_in_currency.usd;
                 } else if (type === 'priceChange1hr') {
@@ -87,10 +98,15 @@ const Crypto = ({match}) => {
                     return price_change_percentage_14d_in_currency.usd;
                 } else if (type === 'priceChange30d') {
                     return price_change_percentage_30d_in_currency.usd;
-                } else if (type === 'volume') {
+                } else if (type === 'volume24hr') {
                     return total_volume.usd
                 } else if (type === 'total_supply') {
-                    return total_supply
+                    if (total_supply) {
+
+                        return `${Number(total_supply.toFixed(0)).toLocaleString('en')} ${symbol.toUpperCase()}`
+                    } else {
+                        return `-`
+                    }
                 } else if (type === 'tickers') {
                     return tickers
                 } else if (type === 'sparkline') {
@@ -98,58 +114,91 @@ const Crypto = ({match}) => {
                 } else if (type === 'links') {
                     if (subtype === 'blockchain_site') {
                         
-                        const Filtering = blockchain_site.filter((item, i) => {
-                            if (item.match(/etherscan/gi)) {
-                                return item
-                            } else if (item.match(/blockchain/gi)) {
-                                return item
-                            }
-                        })
-
-                        return Filtering[0]
+                        return blockchain_site
 
                     } else if (subtype === 'homepage') {
-                        return homepage[0]
+                        return homepage
                     }
                 }
             }
         }
         return (
         
-        <div>
+        <div className='crypto crypto--primary'>
             {LOADING ? 'd' :
 
             <div className='cryptoinfo cryptoinfo--primary'>
                 <div className='maindetails maindetails--primary'>
-                        <img className='maindetails__image' src={ReturnCrypto('image')} />
-                        <h1>
-                            {ReturnCrypto('name')}
-                        </h1>
-                        <span>
-                            {ReturnCrypto('symbol')}
-                        </span>
-                    <div>
-                    <h2>
-                        {ReturnCrypto('current_price')}
-                    </h2>
+                    <div className='maindetailcont1 maindetailcont1--primary'>
+                        <div className='maindetailsubcont1 maindetailsubcont1--primary'>
+                            <img className='maindetailsubcont1__image' src={ReturnCrypto('image')} />
+                            <h1 className='maindetailsubcont1__name'>
+                                {ReturnCrypto('name')} ({ReturnCrypto('symbol')})
+                            </h1>
+                            <p className='maindetailsubcont1__rank'>
+                                #{ReturnCrypto('market_cap_rank')}
+                            </p>
+                        </div>
+                        <div className='maindetailsubcont1 maindetailsubcont1--secondary'>
+                            <h2 className='maindetailsubcont1__price'>
+                                {ReturnCrypto('current_price') && `$${newPrice(ReturnCrypto('current_price'))}`}
+                            </h2>
+                            <p className='maindetailsubcont1__priceChange24hr' style={setPriceColor(ReturnCrypto('priceChange24hr'))}>
+                                {`${addDirectionalTriangle(ReturnCrypto('priceChange24hr'))}${format1DpriceChange(ReturnCrypto('priceChange24hr'))}%`}
+                            </p>
+                        </div>
+                    </div>
+                    <div className='maindetailcont2--primary'>
+                        <div className='maindetailsubcont2 maindetailsubcont2--marketcap'>
+                            <h3 className='maindetailsubcont2__head'>
+                                MARKET CAP
+                            </h3>
+                            <p className='maindetailsubcont2__text'>
+                                {ReturnCrypto('')}
+                            </p>
+                        </div>
+                        <div className='maindetailsubcont2 maindetailsubcont2--circulatingsupply'>
+                            <h3 className='maindetailsubcont2__head'>
+                                CIRCULATING SUPPLY
+                            </h3>
+                            <p className='maindetailsubcont2__text'>
+                                {ReturnCrypto('volume24hr') && ReturnCrypto('circulating_supply')}
+                            </p>
+                        </div>
+                        <div className='maindetailsubcont2 maindetailsubcont2--volume24hr'>
+                            <h3 className='maindetailsubcont2__head'>
+                                VOLUME 24H
+                            </h3>
+                            <p className='maindetailsubcont2__text'>
+                                {ReturnCrypto('volume24hr') && newVol(ReturnCrypto('volume24hr'))}
+                            </p>
+                        </div>
+                        <div className='maindetailsubcont2 maindetailsubcont2--totalsupply'>
+                            <h3 className='maindetailsubcont2__head'>
+                                TOTAL SUPPLY
+                            </h3>
+                            <p className='maindetailsubcont2__text'>
+                                {ReturnCrypto('volume24hr') && ReturnCrypto('total_supply')}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            {ReturnCrypto('market_cap_rank')} |
-            {ReturnCrypto('circulating_supply')} |
-            {ReturnCrypto('genesis_date')} |
-            {ReturnCrypto('categories')} |
-            {ReturnCrypto('marketcapChange24hr')} |
-            {ReturnCrypto('priceChange1hr')} |
-            {ReturnCrypto('priceChange24hr')} |
-            {ReturnCrypto('priceChange7d')} |
-            {ReturnCrypto('priceChange14d')} |
-            {ReturnCrypto('priceChange30d')} |
-            {ReturnCrypto('volume')} |
-            {ReturnCrypto('total_supply')} |
             </div>
             }
         </div>
     )
 }
 
+{/* {ReturnCrypto('market_cap_rank')} |
+{ReturnCrypto('circulating_supply')} |
+{ReturnCrypto('genesis_date')} |
+{ReturnCrypto('categories')} |
+{ReturnCrypto('marketcapChange24hr')} |
+{ReturnCrypto('priceChange1hr')} |
+{ReturnCrypto('priceChange24hr')} |
+{ReturnCrypto('priceChange7d')} |
+{ReturnCrypto('priceChange14d')} |
+{ReturnCrypto('priceChange30d')} |
+{ReturnCrypto('volume')} |
+{ReturnCrypto('total_supply')} | */}
 export default Crypto

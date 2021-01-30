@@ -1,21 +1,135 @@
+/* DARK BLUE #11698e
+    main color : #17D4A5
+    hover color : #13AD87
+*/
+
+
+.crypto--primary {
+    border: 1px solid orangered;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 
 .cryptoinfo--primary {
     display: flex;
     flex-direction: column;
     align-items: center;
 
+    width: 75%;
+
 }
 
 .maindetails--primary {
     border: 1px solid;
-    width: 75%;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    align-items: center;
+    grid-column-gap: 10px;
+}
+
+
+.maindetailcont1--primary {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    border: 3px solid blue;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+/* SUB CONTAINER ONE (IMAGE, NAME, RANK,  */
+.maindetailsubcont1--primary {
+    border: 1px solid;
+    display: flex;
     align-items: center;
 }
 
-.maindetails__image {
-    height: 50px;
-    width: 50px;
+.maindetailsubcont1__image {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+}
+
+.maindetailsubcont1__name {
+    font-family: 'Roboto-Thin';
+    font-size: 1.25em;
+    padding: 0px;
+    margin: 0px 5px;
+}
+
+.maindetailsubcont1__rank {
+    border: none;
+    background-color: #11698e;
+    color: white;
+    font-family: 'Roboto';
+    padding: 2.5px 7.5px;
+    border-radius: 5px;
+    margin: 0px 10px;
+}
+
+/* PRICE, PRICE CHANGE 24HR DIRECTIONAL */
+.maindetailsubcont1--secondary {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid;
+    font-family: 'Roboto-Light';
+}
+
+/*  MAIN DETAIL CONT 2 */
+
+.maindetailcont2--primary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 35%;
+    border: 3px solid blue;
+}
+
+.maindetailsubcont2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.maindetailsubcont2__head {
+    font-family: 'Roboto';
+}
+
+.maindetailsubcont2__text {
+    font-family: 'Roboto-Light';
+}
+
+@media only screen and (max-width: 600px) {
+
+    .cryptoinfo--primary {
+        width: 100%;
+    }
+    .maindetails--primary {
+        flex-direction: column;
+        width: 100%;
+    }
+    .maindetailcont1--primary {
+        width: 100%;
+        align-items: center;
+    }
+
+    .maindetailsubcont1--primary {
+        width: 100%;
+        justify-content: center;
+    }
+    .maindetailsubcont1--secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .maindetailcont2--primary {
+        width: 100%;
+    }
 }

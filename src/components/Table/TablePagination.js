@@ -46,7 +46,6 @@ const TablePagination = ({ShowRowsPerPage}) => {
 
     return (
         <div className='pagination pagination--primary'>
-            {ShowRowsPerPage === 'YES' && 
                 <div className='rowperpage rowperpage--primary'>
                     <label className='rowsperpage__label'>Rows per page: </label>
                     <select className='rowsperpage__select' value={ROWSPERPAGE} onChange={RowPerPageonChange}>
@@ -61,7 +60,6 @@ const TablePagination = ({ShowRowsPerPage}) => {
                         </option>
                     </select>
                 </div>
-            }
             <ul className='paginationul paginationul--primary'>
                 <button className='paginationul__button' style={BackButtonStyle()} onClick={() => {
                     BackButton();

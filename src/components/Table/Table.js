@@ -81,7 +81,7 @@ const Table = () => {
 
     return (
         <div className='tablecomponent tablecomponent--primary'>
-            <TablePagination ShowRowsPerPage='YES' />
+            <TablePagination />
             {!INITIALLOADING ? <TableSkeleton /> : <>
              <table className='table table--primary'>
                 <thead className='table__head'>
@@ -147,7 +147,7 @@ const Table = () => {
                 </table>
             </>
             }
-            <TablePagination ShowRowsPerPage='YES' />
+            <TablePagination />
         </div>
     )
 }

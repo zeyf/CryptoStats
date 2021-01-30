@@ -52,7 +52,13 @@ const FormatFunctions = {
         if (String(price)[0] === '0') {
             return price.toFixed(4)
         } else if (String(price)[0] !== '0') {
-            return price.toFixed(2)
+            const DecimalSplit = String(price).split('.')
+            const BeforeDecimal = Number(DecimalSplit[0]).toLocaleString('en')
+            if (DecimalSplit[1]) {
+                return `${BeforeDecimal}.${DecimalSplit[1]}`
+            } else {
+                return `${BeforeDecimal}.00`
+            }
         }
     },
     setPriceColor: (priceChange) => {
