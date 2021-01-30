@@ -12,9 +12,25 @@ import TableSkeleton from './TableSkeleton'
 const Table = () => {
 
     // UPPERCASE ONLY = STATE VALUES | NON UPPERCASE = FUNCTIONS //
-    const {LOADING, CRYPTOS, INITIALLOADING, CURRENTPAGE, ROWSPERPAGE, GetCryptos} = useContext(TableContext);
+    const {
+        LOADING,
+        CRYPTOS,
+        INITIALLOADING,
+        CURRENTPAGE,
+        ROWSPERPAGE,
+        GetCryptos
+    } = useContext(TableContext);
     // "OUTSOURCING" functions on style and manipulation of general data representation for table data to keep a clean component
-    const {newVol, newPrice, setPriceColor, setLinkParamByID, addDirectionalTriangle, setSparklineColor, format1DpriceChange} = TableFunctions;
+    const {
+        newVol,
+        newPrice,
+        setPriceColor,
+        setLinkParamByID,
+        addDirectionalTriangle,
+        setSparklineColor,
+        format1DpriceChange,
+        nameShortener
+    } = TableFunctions;
 
     useEffect(() => {
         GetCryptos(CURRENTPAGE, ROWSPERPAGE);
@@ -56,7 +72,6 @@ const Table = () => {
     }
 
     return (
-        
         <div className='tablecomponent tablecomponent--primary'>
             <TablePagination ShowRowsPerPage='NO' />
             {!INITIALLOADING ? <TableSkeleton /> : <>
@@ -69,7 +84,7 @@ const Table = () => {
                             </button>
                         </th>
                         <th className='table__headcol table__headcol--name'>
-                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('name')}}>
+                            <button className='table__headcol__button table__headcol__button--name' style={{width: '100%'}} onClick={() => {requestSort('name')}}>
                                 NAME
                             </button>
                         </th>
@@ -99,10 +114,11 @@ const Table = () => {
                             return <tr className='table__row'>
                             <td className='tablebody__data tablebody__data--rank'>{LOADING ?  SkeletonType('rank'): rank}</td>
                             <td className='tablebody__data tablebody__data--name'>
-                                    <Link style={{textDecoration: 'none', margin: '0px', padding: '0px'}} to={setLinkParamByID(id)}>
+                                    <Link style={{textDecoration: 'none', margin: '0px', padding: '0px', color: 'black'}} to={setLinkParamByID(id)}>
                                 <div className='table_'>
                                         {LOADING ? <span style={{margin: '0px 10px'}}>{SkeletonType('icon')}</span> : <img src={icon} alt={`${name} | ${symbol} icon`} className='tablebody__nameimage' style={{height: '20px', width: '20px'}} />}
-                                    <p className='s'>{LOADING ? SkeletonType('name') :`${name} • ${symbol}`}</p>
+                                    <p className='s'>{LOADING ? SkeletonType('name') :`${nameShortener(name)} • ${symbol}`}</p>
+                                    
                                     
                                 </div>
                                 </Link>

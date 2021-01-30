@@ -86,6 +86,14 @@ const TableFunctions = {
         } else if (Math.sign(weeklyChange) === 0) {
             return 'black'
         }
+    },
+    nameShortener: (name) => {
+        if (name.length > 20) {
+            const NameSplit = name.split(/\s/gi);
+            return NameSplit[0];
+        } else {
+            return name;
+        }
     }
 }
 export default TableFunctions;

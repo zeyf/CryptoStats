@@ -21,8 +21,12 @@
     padding: 0px;
 }
 
+
 .tablebody__data {
     text-align: center;
+}
+.tablebody__data--name {
+    text-align: left;
 }
 
 .table__row {
@@ -42,6 +46,11 @@
     padding: 10px 0px;
     cursor: pointer;
     outline: none;
+}
+
+.table__headcol__button--name {
+    text-align: left;
+    padding-left: 45px;
 }
 .table__headcol__button:hover {
     background-color: rgb(227, 227, 231);
@@ -101,5 +110,10 @@
     }
     .table__headcol--sparkline {
         display: none;
+    }
+
+    .table__headcol__button--name {
+        text-align: center;
+        padding-left: 0px;
     }
 }
