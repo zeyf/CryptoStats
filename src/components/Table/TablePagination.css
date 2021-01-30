@@ -13,7 +13,7 @@
     align-items: center;
     margin: 0px;
     padding: 0px;
-
+    
 }
 
 .paginationul__button {
@@ -39,9 +39,14 @@
     color: #13AD87;
 }
 
+
+
+
+
+
 @media only screen and (max-width: 600px) {
     .pagination--primary {
-
+        
         width: 100%;
     }
     .paginationul__button {

@@ -6,7 +6,7 @@ const Navbar = () => {
     return (
         <div className='navbar navbar--primary'>
             <Link className='navbarlogo__link' to='/'>
-                <span className='navbar__span'>cryptostats</span>
+                <span className='navbar__span'>cryptostats 🚀🌕</span>
             </Link>
         </div>
     )

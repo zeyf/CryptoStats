@@ -21,6 +21,15 @@ const Table = () => {
         GetCryptos
     } = useContext(TableContext);
     // "OUTSOURCING" functions on style and manipulation of general data representation for table data to keep a clean component
+    
+    const { items, requestSort } = useSortableData(CRYPTOS);
+
+    useEffect(() => {
+        GetCryptos(CURRENTPAGE, ROWSPERPAGE);
+        requestSort('market_cap_rank')
+        //eslint-disable-next-line
+    }, [])
+    
     const {
         newVol,
         newPrice,
@@ -31,14 +40,7 @@ const Table = () => {
         format1DpriceChange,
         nameShortener
     } = TableFunctions;
-
-    useEffect(() => {
-        GetCryptos(CURRENTPAGE, ROWSPERPAGE);
-        //eslint-disable-next-line
-    }, [])
-
-    const { items, requestSort } = useSortableData(CRYPTOS);
-
+    
     const SkeletonType = (type) => {
         if (type === 'rank') {
             return <SkeletonTheme color='#cececf'>
@@ -118,8 +120,6 @@ const Table = () => {
                                 <div className='table_'>
                                         {LOADING ? <span style={{margin: '0px 10px'}}>{SkeletonType('icon')}</span> : <img src={image} alt={`${name} | ${symbol.toUpperCase()} icon`} className='tablebody__nameimage' style={{height: '20px', width: '20px'}} />}
                                     <p className='s'>{LOADING ? SkeletonType('name') :`${nameShortener(name)} • ${symbol.toUpperCase()}`}</p>
-                                    
-                                    
                                 </div>
                                 </Link>
                             </td>

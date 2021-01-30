@@ -1,9 +1,10 @@
 import TableContext from '../context/TableContext/TableContext'
 import React, {useContext} from 'react'
 import './TablePagination.css'
+import useSortableData from './useSortableData'
 
 const TablePagination = ({ShowRowsPerPage}) => {
-    const {CURRENTPAGE, ROWSPERPAGE, setCurrentPage, setRowsPerPage} = useContext(TableContext);
+    const {CURRENTPAGE, ROWSPERPAGE, CRYPTOS, setCurrentPage, setRowsPerPage} = useContext(TableContext);
     const totalPages = (500/ROWSPERPAGE);
     const PageNumbers = [];
     for (let i=1; i < (totalPages + 1); i++) {
@@ -36,8 +37,10 @@ const TablePagination = ({ShowRowsPerPage}) => {
         }
     }
 
+    const { items, requestSort } = useSortableData(CRYPTOS);
+    
     const RowPerPageonChange = (event) => {
-        setRowsPerPage(event.target.value)
+        setRowsPerPage(event.target.value);
         setCurrentPage(PageNumbers[CURRENTPAGE - 1], event.target.value);
     }
 
@@ -45,15 +48,15 @@ const TablePagination = ({ShowRowsPerPage}) => {
         <div className='pagination pagination--primary'>
             {ShowRowsPerPage === 'YES' && 
                 <div className='rowperpage rowperpage--primary'>
-                    <label>Rows per page:</label>
-                    <select className='rowperpage__select' onChange={RowPerPageonChange}>
-                        <option className='rowperpage__option'>
+                    <label className='rowsperpage__label'>Rows per page: </label>
+                    <select className='rowsperpage__select' onChange={RowPerPageonChange}>
+                        <option className='rowsperpage__option'>
                             20
                         </option>
-                        <option className='rowperpage__option'>
+                        <option className='rowsperpage__option'>
                             25
                         </option>
-                        <option className='rowperpage__option'>
+                        <option className='rowsperpage__option'>
                             50
                         </option>
                     </select>
