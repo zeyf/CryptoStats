@@ -51,9 +51,9 @@ const Crypto = ({match}) => {
                     return id
                 } else if (type === 'image') {
                     if (image.large) {
-                        return <img src={image.large} />
+                        return image.large
                     } else {
-                        return <img src={image.small} />
+                        return image.small
                     }
                 } else if (type === 'symbol') {
                     return symbol
@@ -121,7 +121,9 @@ const Crypto = ({match}) => {
             {LOADING ? 'd' :
 
             <>
-            {ReturnCrypto('image')} |
+                <div className='maindetails maindetails--primary'>
+                    <img className='maindetails__image' src={ReturnCrypto('image')} />
+                </div>
             {ReturnCrypto('name')} |
             {ReturnCrypto('symbol')} |
             {ReturnCrypto('market_cap_rank')} |

@@ -18,6 +18,7 @@ const Table = () => {
         INITIALLOADING,
         CURRENTPAGE,
         ROWSPERPAGE,
+        SORTEDFIELD,
         GetCryptos
     } = useContext(TableContext);
     // "OUTSOURCING" functions on style and manipulation of general data representation for table data to keep a clean component
@@ -26,7 +27,12 @@ const Table = () => {
 
     useEffect(() => {
         GetCryptos(CURRENTPAGE, ROWSPERPAGE);
-        requestSort('market_cap_rank')
+        if (SORTEDFIELD) {
+            requestSort('market_cap_rank');
+            if (SORTEDFIELD.direction === 'descending') {
+                requestSort('market_cap_rank');
+            }
+        }
         //eslint-disable-next-line
     }, [])
     
