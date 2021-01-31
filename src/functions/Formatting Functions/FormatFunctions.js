@@ -55,7 +55,11 @@ const FormatFunctions = {
             const DecimalSplit = String(price).split('.')
             const BeforeDecimal = Number(DecimalSplit[0]).toLocaleString('en')
             if (DecimalSplit[1]) {
-                return `${BeforeDecimal}.${DecimalSplit[1]}`
+                if (DecimalSplit[1].length === 1) {
+                    return `${BeforeDecimal}.${DecimalSplit[1]}0`
+                } else {
+                    return `${BeforeDecimal}.${DecimalSplit[1]}`
+                }
             } else {
                 return `${BeforeDecimal}.00`
             }
@@ -70,14 +74,41 @@ const FormatFunctions = {
             return {color: '#333333'}
         }
     },
+    setCryptoPriceBGColor: (priceChange) => {
+        if (Math.sign(priceChange) === -1) {
+            return {
+                color: 'white',
+                backgroundColor: '#EA4646',
+                border: 'none',
+                borderRadius: '5px',
+                padding: '5px 5px 5px 5px'
+            }
+        } else if (Math.sign(priceChange) === 1) {
+            return {
+                color: 'white',
+                backgroundColor: '#17D4A5',
+                border: 'none',
+                borderRadius: '5px',
+                padding: '5px 5px 5px 5px'
+            }
+        } else if (Math.sign(priceChange) === 0) {
+            return {
+                color: 'white',
+                backgroundColor: '#333333',
+                border: 'none',
+                borderRadius: '5px',
+                padding: '5px 5px 5px 5px'
+            }
+        }
+    },
     setLinkParamByID: (id) => {
         return `/cryptocurrencies/${id}`
     },
     addDirectionalTriangle: (priceChange) => {
         if (Math.sign(priceChange) === 1) {
-            return '▴'
+            return '▴ '
         } else if (Math.sign(priceChange) === -1) {
-            return '▾'
+            return '▾ '
         } else if (Math.sign(priceChange) === 0) {
             return '';
         }
