@@ -1,0 +1,31 @@
+.sparklinesbuttons--primary {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .sparklinesbuttons--primary {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    
+    .sparklinebuttons__button {
+        border: none;
+        background-color: #17D4A5;
+        color: white;
+        padding: 15px 0px;
+        border-right: 1px solid white;
+        width: 100%;
+        outline: none;
+        font-size: 0.85em;
+        transition: 0.3s;
+    }
+
+    .sparklinebuttons__button:last-child {
+        border-right: none;
+    }
+}

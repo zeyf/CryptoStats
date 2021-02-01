@@ -2,6 +2,8 @@ import React, {useEffect, useContext} from 'react'
 import CryptoContext from '../context/CryptoContext/CryptoContext'
 import FormatFunctions from '../../functions/Formatting Functions/FormatFunctions'
 import CryptoSkeleton from './CryptoSkeleton'
+import {Sparklines, SparklinesLine} from 'react-sparklines';
+import CryptoChart from './CryptoChart/CryptoChart';
 import './Crypto.css'
 
 const Crypto = ({match}) => {
@@ -21,11 +23,11 @@ const Crypto = ({match}) => {
             format1DpriceChange,
             nameShortener,
             setCryptoPriceBGColor
+
         } = FormatFunctions;
 
         const ReturnCrypto = (type, subtype) => {
             if (CRYPTO) {
-                console.log(CRYPTO)
                 
                 const {name, id, image, symbol, market_cap_rank, market_data, genesis_date, description, categories, links} = CRYPTO;
 
@@ -121,7 +123,7 @@ const Crypto = ({match}) => {
                 } else if (type === 'tickers') {
                     return tickers
                 } else if (type === 'sparkline') {
-                    return sparkline_7d
+                    return sparkline_7d.price
                 } else if (type === 'links') {
                     if (subtype === 'blockchain_site') {
                         
@@ -203,96 +205,118 @@ const Crypto = ({match}) => {
                         <div className='maindetailsubcont3 maindetailsubcont3--primary'>
                             {ReturnCrypto('links', 'blockchain_site') && ReturnCrypto('links', 'blockchain_site').map((item, i) => {
                                 if(item) {
-                                    return <a className='maindetailsubcont3__link' href={item}>Blockchain Explorer {++i}</a>
+                                    return <a className='maindetailsubcont3__link' href={item} target='_blank'>Blockchain Explorer {++i}</a>
                                 }
                             })}
                         </div>
                     </div>
                 </div>
-                <div className='maindetailcont4 maindetailcont4--primary'>
-                        <div className='maindetailsubcont4 maindetailsubcont4--primary'>
-                            <h4 className='maindetailsubcont4__head'>
-                                {ReturnCrypto('symbol') && `${ReturnCrypto('symbol')} Price Statistics`}
-                            </h4>
-                            <table className='maindetailsubcont4__table'>
-                                <tbody>
-                                </tbody>
-                                    <tr className='maindetailsubcont4__tablerow'>
-                                        <td className='maindetailsubcont4__tabledata1'>
-                                            {ReturnCrypto('symbol') && ReturnCrypto('symbol')} Price
-                                        </td>
-                                        <td className='maindetailsubcont4__tabledata2'>
-                                            {ReturnCrypto('current_price') && `$${newPrice(ReturnCrypto('current_price'))}`}
-                                        </td>
-                                    </tr>
-                                    <tr className='maindetailsubcont4__tablerow'>
-                                        <td className='maindetailsubcont4__tabledata1'>
-                                            24H Low to High
-                                        </td>
-                                        <td className='maindetailsubcont4__tabledata2'>
-                                            {ReturnCrypto('low_24hr') && ReturnCrypto('high_24hr') && `$${newPrice(ReturnCrypto('low_24hr'))} - $${newPrice(ReturnCrypto('high_24hr'))}`}
-                                        </td>
-                                    </tr>
-                                    <tr className='maindetailsubcont4__tablerow'>
-                                        <td className='maindetailsubcont4__tabledata1'>
-                                            24H Spread Range
-                                        </td>
-                                        <td className='maindetailsubcont4__tabledata2'>
-                                            {ReturnCrypto('low_24hr') && ReturnCrypto('high_24hr') &&
-                                             `${((((ReturnCrypto('low_24hr') / ReturnCrypto('high_24hr')) - 1) * -100).toFixed(2))}%`
-                                             }
-                                        </td>
-                                    </tr>
-                                    <tr className='maindetailsubcont4__tablerow'>
-                                        <td className='maindetailsubcont4__tabledata1'>
-                                            Market Cap
-                                        </td>
-                                        <td className='maindetailsubcont4__tabledata2'>
-                                        {ReturnCrypto('market_cap') && `$${ReturnCrypto('market_cap').toLocaleString('en')}`}
-                                        </td>
-                                    </tr>
-                                    <tr className='maindetailsubcont4__tablerow'>
-                                        <td className='maindetailsubcont4__tabledata1'>
-                                            Trading Volume
-                                        </td>
-                                        <td className='maindetailsubcont4__tabledata2'>
-                                            {ReturnCrypto('volume24hr') && `$${ReturnCrypto('volume24hr').toLocaleString('en')}`}
-                                        </td>
-                                    </tr>
-                                    <tr className='maindetailsubcont4__tablerow'>
-                                        <td className='maindetailsubcont4__tabledata1'>
-                                            Volume to Market Cap 
-                                        </td>
-                                        <td className='maindetailsubcont4__tabledata2'>
-                                            {ReturnCrypto('volume24hr') && ReturnCrypto('market_cap') && `${((ReturnCrypto('volume24hr') / ReturnCrypto('market_cap')) * 100).toFixed(2)}%`}
-                                        </td>
-                                    </tr>
-                                    <tr className='maindetailsubcont4__tablerow'>
-                                        <td className='maindetailsubcont4__tabledata1'>
-                                            24H Market Cap
-                                        </td>
-                                        <td className='maindetailsubcont4__tabledata2'>
-                                            {ReturnCrypto('marketcapChange24hr') && `${ReturnCrypto('marketcapChange24hr').toFixed(2)}%`}
-                                        </td>
-                                    </tr>
-                                    <tr className='maindetailsubcont4__tablerow'>
-                                        <td className='maindetailsubcont4__tabledata1'>
-                                            All-Time High
-                                        </td>
-                                        <td className='maindetailsubcont4__tabledata2'>
-                                            {ReturnCrypto('ath') && `$${newPrice(ReturnCrypto('ath'))}`}
-                                        </td>
-                                    </tr>
-                                    <tr className='maindetailsubcont4__tablerow'>
-                                        <td className='maindetailsubcont4__tabledata1'>
-                                            All-Time Low
-                                        </td>
-                                        <td className='maindetailsubcont4__tabledata2'>
-                                            {ReturnCrypto('atl') && `$${newPrice(ReturnCrypto('atl'))}`}
-                                        </td>
-                                    </tr>
-                            </table>
-                        </div>
+                <div className='statsection statsection--primary'>
+                    <CryptoChart ReturnCrypto={ReturnCrypto} setSparklineColor={setSparklineColor} />
+                    <div className='maindetailcont4 maindetailcont4--primary'>
+                            <div className='maindetailsubcont4 maindetailsubcont4--primary'>
+                                <h4 className='maindetailsubcont4__head'>
+                                    {ReturnCrypto('symbol') && `${ReturnCrypto('symbol')} Price Statistics`}
+                                </h4>
+                                <table className='maindetailsubcont4__table'>
+                                    <tbody>
+                                    
+                                        <tr className='maindetailsubcont4__tablerow'>
+                                            <td className='maindetailsubcont4__tabledata1'>
+                                                {ReturnCrypto('symbol') && ReturnCrypto('symbol')} Price
+                                            </td>
+                                            <td className='maindetailsubcont4__tabledata2'>
+                                                {ReturnCrypto('current_price') && `$${newPrice(ReturnCrypto('current_price'))}`}
+                                            </td>
+                                        </tr>
+                                        <tr className='maindetailsubcont4__tablerow'>
+                                            <td className='maindetailsubcont4__tabledata1'>
+                                                24H Low to High
+                                            </td>
+                                            <td className='maindetailsubcont4__tabledata2'>
+                                                {ReturnCrypto('low_24hr') && ReturnCrypto('high_24hr') && `$${newPrice(ReturnCrypto('low_24hr'))} - $${newPrice(ReturnCrypto('high_24hr'))}`}
+                                            </td>
+                                        </tr>
+                                        <tr className='maindetailsubcont4__tablerow'>
+                                            <td className='maindetailsubcont4__tabledata1'>
+                                                24H Spread Range
+                                            </td>
+                                            <td className='maindetailsubcont4__tabledata2'>
+                                                {ReturnCrypto('low_24hr') && ReturnCrypto('high_24hr') &&
+                                                `${((((ReturnCrypto('low_24hr') / ReturnCrypto('high_24hr')) - 1) * -100).toFixed(2))}%`
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr className='maindetailsubcont4__tablerow'>
+                                            <td className='maindetailsubcont4__tabledata1'>
+                                                All-Time High
+                                            </td>
+                                            <td className='maindetailsubcont4__tabledata2'>
+                                                {ReturnCrypto('ath') && `$${newPrice(ReturnCrypto('ath'))}`}
+                                            </td>
+                                        </tr>
+                                        <tr className='maindetailsubcont4__tablerow'>
+                                            <td className='maindetailsubcont4__tabledata1'>
+                                                All-Time Low
+                                            </td>
+                                            <td className='maindetailsubcont4__tabledata2'>
+                                                {ReturnCrypto('atl') && `$${newPrice(ReturnCrypto('atl'))}`}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className='maindetailsubcont4 maindetailsubcont4--primary'>
+                                <h4 className='maindetailsubcont4__head'>
+                                    {ReturnCrypto('symbol') && `${ReturnCrypto('symbol')} Market Cap Statistics`}
+                                </h4>
+                                <table className='maindetailsubcont4__table'>
+                                    <tbody>
+                                        <tr className='maindetailsubcont4__tablerow'>
+                                            <td className='maindetailsubcont4__tabledata1'>
+                                                Market Cap
+                                            </td>
+                                            <td className='maindetailsubcont4__tabledata2'>
+                                            {ReturnCrypto('market_cap') && `$${ReturnCrypto('market_cap').toLocaleString('en')}`}
+                                            </td>
+                                        </tr>
+                                        <tr className='maindetailsubcont4__tablerow'>
+                                            <td className='maindetailsubcont4__tabledata1'>
+                                                Trading Volume
+                                            </td>
+                                            <td className='maindetailsubcont4__tabledata2'>
+                                                {ReturnCrypto('volume24hr') && `$${ReturnCrypto('volume24hr').toLocaleString('en')}`}
+                                            </td>
+                                        </tr>
+                                        <tr className='maindetailsubcont4__tablerow'>
+                                            <td className='maindetailsubcont4__tabledata1'>
+                                                Volume to Market Cap 
+                                            </td>
+                                            <td className='maindetailsubcont4__tabledata2'>
+                                                {ReturnCrypto('volume24hr') && ReturnCrypto('market_cap') && `${((ReturnCrypto('volume24hr') / ReturnCrypto('market_cap')) * 100).toFixed(2)}%`}
+                                            </td>
+                                        </tr>
+                                        <tr className='maindetailsubcont4__tablerow'>
+                                            <td className='maindetailsubcont4__tabledata1'>
+                                                24H Market Cap
+                                            </td>
+                                            <td className='maindetailsubcont4__tabledata2'>
+                                                {ReturnCrypto('marketcapChange24hr') && `${ReturnCrypto('marketcapChange24hr').toFixed(2)}%`}
+                                            </td>
+                                        </tr>
+                                        <tr className='maindetailsubcont4__tablerow'>
+                                            <td className='maindetailsubcont4__tabledata1'>
+                                                Market Cap Rank
+                                            </td>
+                                            <td className='maindetailsubcont4__tabledata2'>
+                                                {ReturnCrypto('market_cap_rank') && `#${ReturnCrypto('market_cap_rank')}`}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                    </div>
                 </div>
             </div>
             }
