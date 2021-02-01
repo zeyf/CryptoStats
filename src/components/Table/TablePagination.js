@@ -43,7 +43,7 @@ const TablePagination = ({ShowRowsPerPage}) => {
         setRowsPerPage(event.target.value);
         setCurrentPage(PageNumbers[CURRENTPAGE - 1], event.target.value);
     }
-
+    
     return (
         <div className='pagination pagination--primary'>
                 <div className='rowperpage rowperpage--primary'>

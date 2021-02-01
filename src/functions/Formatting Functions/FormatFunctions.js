@@ -67,9 +67,9 @@ const FormatFunctions = {
     },
     setPriceColor: (priceChange) => {
         if (Math.sign(priceChange) === -1) {
-            return {color: 'red'}
+            return {color: '#EA4646'}
         } else if (Math.sign(priceChange) === 1) {
-            return {color: '#23a455'}
+            return {color: '#17D4A5'}
         } else if (Math.sign(priceChange) === 0) {
             return {color: '#333333'}
         }
@@ -122,9 +122,9 @@ const FormatFunctions = {
     },
     setSparklineColor: (weeklyChange) => {
         if (Math.sign(weeklyChange) === 1) {
-            return '#23a455'
+            return '#17D4A5'
         } else if (Math.sign(weeklyChange) === -1) {
-            return 'red'
+            return '#EA4646'
         } else if (Math.sign(weeklyChange) === 0) {
             return 'black'
         }

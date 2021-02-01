@@ -5,6 +5,7 @@ import Navbar from './components/layout/Navbar/Navbar';
 import Table from './components/Table/Table'
 import Crypto from './components/Crypto/Crypto'
 import CryptoState from './components/context/CryptoContext/CryptoState'
+import CryptoChartState from './components/context/CryptoContext/CryptoChart Context/CryptoChartState'
 import Footer from './components/layout/Footer/Footer'
 const App = () => {
 
@@ -17,7 +18,9 @@ const App = () => {
             <Route exact path='/' component={Table} />
             <Route exact path='/cryptocurrencies' component={Table} />
             <CryptoState>
-              <Route exact path='/cryptocurrencies/:CryptoID' component={Crypto} />
+              <CryptoChartState>
+                <Route exact path='/cryptocurrencies/:CryptoID' component={Crypto} />
+              </CryptoChartState>
             </CryptoState>
           </Switch>
           <Footer />
