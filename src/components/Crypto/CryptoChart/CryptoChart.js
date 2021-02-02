@@ -2,8 +2,11 @@ import React, {useEffect} from 'react'
 import {Sparklines, SparklinesLine} from 'react-sparklines';
 import {useContext} from 'react';
 import CryptoChartContext from '../../context/CryptoContext/CryptoChart Context/CryptoChartContext';
+<<<<<<< HEAD
 import CryptoChartSkeleton from './CryptoChartSkeleton'
 import {Line, LineChart, XAxis, YAxis, Tooltip} from 'recharts'
+=======
+>>>>>>> 8ceeeb0b83f7f12c974098c927529430eb46be9a
 import './CryptoChart.css'
 
 
@@ -19,6 +22,7 @@ const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
 
     const SelectedTimeFrame = (type) => {
         if (TIMEFRAME) {
+<<<<<<< HEAD
             if (TIMEFRAME === type) return {backgroundColor: '#13AD87'}
         }
     }
@@ -54,6 +58,33 @@ const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
                     renderLineChart()
                 }
             </div>
+=======
+            if (TIMEFRAME === type) {
+                return {
+                    backgroundColor: '#13AD87'
+                }
+            } else if (TIMEFRAME === type) {
+                return {
+                    backgroundColor: '#13AD87'
+                }
+            } else if (TIMEFRAME === type) {
+                return {
+                    backgroundColor: '#13AD87'
+                }
+            } else if (TIMEFRAME === type) {
+                return {
+                    backgroundColor: '#13AD87'
+                }
+            }
+        }
+    }
+    
+    return (
+        <div>
+            <Sparklines data={ReturnCrypto('sparkline')} height={50} width={150}>
+                <SparklinesLine color={setSparklineColor(ReturnCrypto('priceChange7d'))} style={{fill: 'none'}} />
+            </Sparklines>
+>>>>>>> 8ceeeb0b83f7f12c974098c927529430eb46be9a
             <div className='sparklinebuttons sparklinesbuttons--primary'>
                 <button className='sparklinebuttons__button' style={SelectedTimeFrame(1)} onClick={() => {
                     if (ReturnCrypto('id')) {
@@ -85,7 +116,11 @@ const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
                     30D
                 </button>
             </div>
+<<<<<<< HEAD
         </div> 
+=======
+        </div>
+>>>>>>> 8ceeeb0b83f7f12c974098c927529430eb46be9a
     )
 }
 
