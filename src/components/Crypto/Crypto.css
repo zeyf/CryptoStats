@@ -156,7 +156,7 @@
 
 .statsection--primary {
     width: 100%;
-    border: 1px solid;
+
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -169,7 +169,6 @@
     align-items: center;
     justify-content: end;
     width: 25%;
-    border: 1px solid;
 }
 
 .maindetailsubcont4--primary {
@@ -240,7 +239,6 @@
 
     .statsection--primary {
         width: 100%;
-        border: 1px solid;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
