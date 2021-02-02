@@ -30,25 +30,40 @@ const CryptoChartState = ({children}) => {
             const Data = await axios.get(`https://api.coingecko.com/api/v3/coins/${CryptoID}/market_chart?vs_currency=usd&days=${TimeFrame}`);
 
             const TimeFramePriceData = Data.data.prices;
-            console.log(TimeFramePriceData)
             const Prices = TimeFramePriceData.map((daydataset, i) => {
             if (String(daydataset)[0] !== '0') return Number(daydataset[daydataset.length - 1].toFixed(2))
             if (String(daydataset)[0] === '0') return Number(daydataset[daydataset.length - 1].toFixed(4))
             // may have to add condition handling if undefined, null, etc
             })
-            const Dates = TimeFramePriceData.map((daydataset, i) => {
-            
-                const UnixTimeStamp = daydataset[daydataset.length - daydataset.length]
-                const UnixToDate = new Date(UnixTimeStamp); // milliseconds to seconds
-                return `${UnixToDate.getMonth()}/${UnixToDate.getDay()}/${UnixToDate.getFullYear()}\n${UnixToDate.getHours()}:${UnixToDate.getMinutes()}:${UnixToDate.getSeconds()} ${UnixToDate.getHours() >= 0 && UnixToDate.getHours() < 12 ? `AM` : `PM`}`
-                // may have to add condition handling if undefined, null, etc
-            })
-            const DatePriceData = {
-                PRICES: Prices,
-                DATES: Dates
-            }
 
-            dispatch({type: GET_CRYPTO_CHART_DATA, payload: DatePriceData})
+            const DateFormatted = (type) => {
+                if (TimeFramePriceData) {
+
+                    const DateType = TimeFramePriceData.map((daydataset, i) => {
+                        
+                        const UnixTimeStamp = daydataset[daydataset.length - daydataset.length]
+                        const UnixToDate = new Date(UnixTimeStamp); // milliseconds to seconds
+                        
+                        if (type === 'datetime') {   
+                            return `${UnixToDate.getHours()}:${UnixToDate.getMinutes()}:${UnixToDate.getSeconds()} ${UnixToDate.getHours() >= 0 && UnixToDate.getHours() < 12 ? `AM` : `PM`}`
+                        } else if (type === 'date') {
+                            return `${UnixToDate.getDay()}/${UnixToDate.getMonth()}`
+                        }
+                    })
+                    return DateType
+                    // may have to add condition handling if undefined, null, etc    
+                }
+            }
+                
+            const DatePriceObjArray = TimeFramePriceData.map((item, i) => {
+                return {
+                    time: DateFormatted('datetime')[i],
+                    date: DateFormatted('date')[i],
+                    price: Prices[i]
+                }
+            })
+
+            dispatch({type: GET_CRYPTO_CHART_DATA, payload: DatePriceObjArray})
         }
     }
 

@@ -18,7 +18,7 @@ const CryptoChartReducer = (state, action) => {
         case GET_CRYPTO_CHART_DATA:
             return {
                 ...state,
-                CHARTDATA: action.payload,
+                CRYPTODATA: action.payload,
                 LOADING: false
             }
         case SET_CRYPTO_TIME_FRAME:

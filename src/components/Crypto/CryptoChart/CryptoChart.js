@@ -2,6 +2,8 @@ import React, {useEffect} from 'react'
 import {Sparklines, SparklinesLine} from 'react-sparklines';
 import {useContext} from 'react';
 import CryptoChartContext from '../../context/CryptoContext/CryptoChart Context/CryptoChartContext';
+import CryptoChartSkeleton from './CryptoChartSkeleton'
+import {Line, LineChart, XAxis, YAxis, Tooltip} from 'recharts'
 import './CryptoChart.css'
 
 
@@ -17,31 +19,41 @@ const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
 
     const SelectedTimeFrame = (type) => {
         if (TIMEFRAME) {
-            if (TIMEFRAME === type) {
-                return {
-                    backgroundColor: '#13AD87'
-                }
-            } else if (TIMEFRAME === type) {
-                return {
-                    backgroundColor: '#13AD87'
-                }
-            } else if (TIMEFRAME === type) {
-                return {
-                    backgroundColor: '#13AD87'
-                }
-            } else if (TIMEFRAME === type) {
-                return {
-                    backgroundColor: '#13AD87'
-                }
-            }
+            if (TIMEFRAME === type) return {backgroundColor: '#13AD87'}
         }
     }
+
+    const ReturnData = (type) => {
+        if (CRYPTODATA) {
+            if (type === 'data') {
+                console.log(CRYPTODATA)
+                return CRYPTODATA
+            } else if (type === 'lowest') {
+                return CRYPTODATA
+            }
+            
+        }
+    }
+
+    const renderLineChart = () => {
+
+        return <LineChart width={300} height={125} data={ReturnData('data')}>
+          <Line type="monotone" dataKey='price' stroke="#8884d8" dot={false} />
+          <YAxis dataKey='price'  domain={[30000, 40000]} />
+          <XAxis dataKey='date'tick={false}/>
+          <Tooltip />
+        </LineChart>
+        }
+      
     
     return (
-        <div>
-            <Sparklines data={ReturnCrypto('sparkline')} height={50} width={150}>
-                <SparklinesLine color={setSparklineColor(ReturnCrypto('priceChange7d'))} style={{fill: 'none'}} />
-            </Sparklines>
+        <div className='cryptochart cryptochart--primary'>
+            <div className='sparkline sparkline--primary'>
+
+                {LOADING ? <CryptoChartSkeleton /> : 
+                    renderLineChart()
+                }
+            </div>
             <div className='sparklinebuttons sparklinesbuttons--primary'>
                 <button className='sparklinebuttons__button' style={SelectedTimeFrame(1)} onClick={() => {
                     if (ReturnCrypto('id')) {
@@ -73,7 +85,7 @@ const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
                     30D
                 </button>
             </div>
-        </div>
+        </div> 
     )
 }
 

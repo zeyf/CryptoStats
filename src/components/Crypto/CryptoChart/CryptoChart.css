@@ -4,9 +4,42 @@
     justify-content: space-evenly;
 }
 
+.cryptochart--primary {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border: 1px solid;
+}
 
+.sparkline--primary {
+    width: 100%;
+    margin: 0px auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid;
+}
+
+.sparklinebuttons__button {
+    border: none;
+    background-color: #17D4A5;
+    color: white;
+    padding: 15px 0px;
+    border-right: 1px solid white;
+    width: 100%;
+    outline: none;
+    font-size: 0.85em;
+    transition: 0.3s;
+}
 
 @media only screen and (max-width: 600px) {
+    
+    .cryptochart--primary {
+        width: 100%;
+    }
+    
     .sparklinesbuttons--primary {
         display: flex;
         flex-direction: row;
@@ -28,4 +61,10 @@
     .sparklinebuttons__button:last-child {
         border-right: none;
     }
+
+    .sparkline--primary {
+        width: 100%;
+        height: 16vh;
+    }
+    
 }
