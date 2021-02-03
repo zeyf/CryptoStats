@@ -5,12 +5,13 @@ import Skeleton, {SkeletonTheme} from 'react-loading-skeleton';
 const CryptoChartSkeleton = () => {
 
     const SkeletonType = (type) => {
-        if (type === 'chart') return <SkeletonTheme  color={'#cececf'}><Skeleton height={'16vh'} width={'100%'}></Skeleton></SkeletonTheme>
+        if (type === 'chart') return <SkeletonTheme  color={'#cececf'}><Skeleton width={'100vw'} height={'100%'}></Skeleton></SkeletonTheme>
     }
 
     return (
-        <div className='sparkline sparkline--primary'>
+        <div className='sparkline--primary'>
             {SkeletonType('chart')}
+            <p style={{position: 'absolute'}}>Loading...</p>
         </div>
     )
 }

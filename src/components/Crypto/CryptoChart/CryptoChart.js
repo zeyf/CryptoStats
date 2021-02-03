@@ -9,7 +9,7 @@ import './CryptoChart.css'
 
 const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
 
-    const {CRYPTODATA, TIMEFRAME, LOADING, MINMAX, getCryptoChartData, setTimeFrame} = useContext(CryptoChartContext);
+    const {CRYPTOCHARTDATA, TIMEFRAME, LOADING, MINMAX, getCryptoChartData, setTimeFrame} = useContext(CryptoChartContext);
 
 
     useEffect(() => {
@@ -21,11 +21,11 @@ const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
     }
 
     const ReturnData = (type) => {
-        if (CRYPTODATA) {
+        if (CRYPTOCHARTDATA) {
             const {min, max} = MINMAX;
 
             if (type === 'data') {
-                return CRYPTODATA
+                return CRYPTOCHARTDATA
             } else if (type === 'min') {
                 return min
             } else if (type === 'max') {
@@ -50,20 +50,20 @@ const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
         }
     }
 
-    const LineChartHeight = () => {
-        if (window.Screen.width <= 600) {
-            return 375
-        }
+    const YAxisWidth = () => {
+        if (window.screen.width < 600) return 50 
+        if (window.screen.width >= 600 && window.screen.width <= 1024) return 75 
+        if (window.screen.width > 1024) return 75
     }
 
     const renderLineChart = () => {
         if (ReturnData('data')) {
 
             return <ResponsiveContainer width={'100%'} height={'100%'}>
-                        <AreaChart data={ReturnData('data')}>
-                            <Area type="monotone" dataKey='price' stroke="#4141bf" dot={false} fill={'rgba(0,255,255, 0.40)'} />
-                            <YAxis dataKey='price' domain={[ReturnData('LowerY'), ReturnData('HigherY')]} width={50} type='number'  />
-                            <XAxis label='Date' dataKey='date'tick={false} margin={{ left: 0, right: 0, top: 0, bottom: 0}}/>
+                        <AreaChart data={ReturnData('data')} margin={{left: 5, right: 10, top: 0, bottom: 0}}>
+                            <Area type="monotone" dataKey='Price' stroke="#4141bf" dot={false} fill={'rgba(0,255,255, 0.40)'} />
+                            <YAxis dataKey='price' domain={[ReturnData('LowerY'), ReturnData('HigherY')]} width={YAxisWidth()} type='number'  />
+                            <XAxis  dataKey='date'tick={false} margin={{ left: 0, right: 0, top: 0, bottom: 0}} height={15}/>
                             <Tooltip />
                         </AreaChart>
                     </ResponsiveContainer>
@@ -75,7 +75,7 @@ const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
         <div className='cryptochart cryptochart--primary'>
             <div className='sparkline sparkline--primary'>
 
-                {LOADING ? <CryptoChartSkeleton /> : 
+                {LOADING ? <div style={{display: 'flex', alignItems: 'center'}}><p >Loading...</p></div> : 
                     ReturnData('data') && renderLineChart()
                 }
             </div>

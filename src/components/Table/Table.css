@@ -76,7 +76,7 @@
     padding: 0px 0px 0px 0px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
 
     
     .table--primary {
@@ -115,5 +115,13 @@
     .table__headcol__button--name {
         text-align: center;
         padding-left: 0px;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 700px)  {
+    .table--primary {
+        width: 100%;
+        border-collapse: collapse;
+        padding: 0px 10px;
     }
 }

@@ -24,3 +24,11 @@ export const GET_CRYPTO_CHART_DATA = 'GET_CRYPTO_CHART_DATA';
 export const SET_CRYPTO_TIME_FRAME = 'SET_CRYPTO_TIME_FRAME'; // 17.4
 
 export const SET_MIN_MAX_PRICE = 'SET_MIN_MAX_PRICE';
+
+export const SET_1D_DATA = 'SET_1D_DATA';
+
+export const SET_7D_DATA = 'SET_7D_DATA';
+
+export const SET_14D_DATA = 'SET_14D_DATA';
+
+export const SET_30D_DATA = 'SET_30D_DATA';

@@ -6,13 +6,17 @@ import {
     SET_LOADING,
     GET_CRYPTO_CHART_DATA,
     SET_CRYPTO_TIME_FRAME,
-    SET_MIN_MAX_PRICE
+    SET_MIN_MAX_PRICE,
+    SET_1D_DATA,
+    SET_7D_DATA,
+    SET_14D_DATA,
+    SET_30D_DATA
 } from '../../types';
 
 const CryptoChartState = ({children}) => {
     
     const InitialState = {
-        CRYPTODATA: null,
+        CRYPTOCHARTDATA: null,
         MINMAX: null,
         TIMEFRAME: 1,
         LOADING: false,
@@ -29,12 +33,15 @@ const CryptoChartState = ({children}) => {
         if (CryptoID) {
             SetLoading();
             setTimeFrame(TimeFrame);
-            const Data = await axios.get(`https://api.coingecko.com/api/v3/coins/${CryptoID}/market_chart?vs_currency=usd&days=${TimeFrame}`);
+            const Data1D = await axios.get(`https://api.coingecko.com/api/v3/coins/${CryptoID}/market_chart?vs_currency=usd&days=${TimeFrame}`);
+            const Data2 = await axios.get(`https://api.coingecko.com/api/v3/coins/${CryptoID}/market_chart?vs_currency=usd&days=7`);
+            const Data3 = await axios.get(`https://api.coingecko.com/api/v3/coins/${CryptoID}/market_chart?vs_currency=usd&days=14`);
+            const Data4 = await axios.get(`https://api.coingecko.com/api/v3/coins/${CryptoID}/market_chart?vs_currency=usd&days=30`);
 
-            const TimeFramePriceData = Data.data.prices;
+            const TimeFramePriceData = Data1D.data.prices;
             const Prices = TimeFramePriceData.map((daydataset, i) => {
-            if (String(daydataset)[0] !== '0') return Number(daydataset[daydataset.length - 1].toFixed(2))
-            if (String(daydataset)[0] === '0') return Number(daydataset[daydataset.length - 1].toFixed(4))
+                if (String(daydataset)[0] !== '0') return Number(daydataset[daydataset.length - 1].toFixed(2))
+                if (String(daydataset)[0] === '0') return Number(daydataset[daydataset.length - 1].toFixed(4))
             // may have to add condition handling if undefined, null, etc
             })
 
@@ -45,12 +52,12 @@ const CryptoChartState = ({children}) => {
                         
                         const UnixTimeStamp = daydataset[daydataset.length - daydataset.length]
                         const UnixToDate = new Date(UnixTimeStamp); // milliseconds to seconds
-                        const Datee = String(UnixToDate).split(/\s/gi).slice(0, 4)
-                        const Datee3 = String(UnixToDate).split(/\s/gi).slice(4, 5)
+                        const ToolTipDate = String(UnixToDate).split(/\s/gi).slice(1, 4)
+                        const Time = String(UnixToDate).split(/\s/gi).slice(4, 5)
                         if (type === 'datetime') {   
                             return `${UnixToDate.getHours()}:${UnixToDate.getMinutes()}:${UnixToDate.getSeconds()} ${UnixToDate.getHours() >= 0 && UnixToDate.getHours() < 12 ? `AM` : `PM`}`
                         } else if (type === 'date') {
-                            return `${String(Datee).replaceAll(/,/gi, ' ')} ${Datee3}`
+                            return `${String(ToolTipDate).replaceAll(/,/gi, ' ')} ${Time}`
                         }
                     })
                     return DateType
@@ -64,7 +71,7 @@ const CryptoChartState = ({children}) => {
                 return {
                     time: DateFormatted('datetime')[i],
                     date: DateFormatted('date')[i],
-                    price: Prices[i]
+                    Price: Prices[i]
                 }
             })
             
@@ -89,7 +96,7 @@ const CryptoChartState = ({children}) => {
 
     return <CryptoChartContext.Provider value={{
             
-            CRYPTODATA: state.CRYPTODATA,
+            CRYPTOCHARTDATA: state.CRYPTOCHARTDATA,
             TIMEFRAME: state.TIMEFRAME,
             LOADING: state.LOADING,
             MINMAX: state.MINMAX,

@@ -35,7 +35,7 @@
     cursor: pointer;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
     
     .cryptochart--primary {
         width: 100%;
@@ -49,7 +49,6 @@
     
     .sparklinebuttons__button {
         border: none;
-        background-color: #17D4A5;
         color: white;
         padding: 15px 0px;
         border-right: 1px solid white;
@@ -75,3 +74,55 @@
     } 
     
 }
+
+@media only screen and (max-height: 400px) {
+    .sparkline--primary {
+        width: 99.75%;
+        height: 65vh;
+    }
+    tspan {
+        font-size: 0.65em;
+        color: black;
+    } 
+    
+}
+
+@media only screen and (min-height: 400px) and (max-height: 600px) {
+    .sparkline--primary {
+        width: 99.75%;
+        height: 65vh;
+    }
+    tspan {
+        font-size: 0.65em;
+        color: black;
+    } 
+    
+}
+
+@media only screen and (min-height: 600px) and (max-height: 800px) {
+
+    .sparkline--primary {
+        width: 99.75%;
+        height: 35vh;
+    }
+    tspan {
+        font-size: 0.65em;
+        color: black;
+    } 
+    
+}
+
+@media only screen and (min-width: 1024px) {
+
+    .sparkline--primary {
+        width: 99.75%;
+        height: 45vh;
+    }
+    tspan {
+        font-size: 0.75em;
+        color: black;
+    } 
+}
+
+
+

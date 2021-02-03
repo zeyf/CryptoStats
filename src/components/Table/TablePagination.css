@@ -44,14 +44,19 @@
 
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
     .pagination--primary {
-        
         width: 100%;
     }
     .paginationul__button {
         height: 4.5vh;
         width: 4.5vh;
         font-size: 3.5em;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 700px)  {
+    .pagination--primary {
+        width: 100%;
     }
 }
