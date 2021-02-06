@@ -1,19 +1,20 @@
 import React, {useEffect} from 'react'
-import {Sparklines, SparklinesLine} from 'react-sparklines';
 import {useContext} from 'react';
 import CryptoChartContext from '../../context/CryptoContext/CryptoChart Context/CryptoChartContext';
-import CryptoChartSkeleton from './CryptoChartSkeleton'
-import {Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, Area, AreaChart} from 'recharts'
+// import CryptoChartSkeleton from './CryptoChartSkeleton'
+import {XAxis, YAxis, Tooltip, ResponsiveContainer, Area, AreaChart} from 'recharts'
+import Loader from '../../layout/Loader/Loader'
 import './CryptoChart.css'
 
 
-const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
+const CryptoChart = ({ReturnCrypto, formatPriceChange}) => {
 
-    const {CRYPTOCHARTDATA, TIMEFRAME, LOADING, MINMAX, getCryptoChartData, setTimeFrame} = useContext(CryptoChartContext);
+    const {CRYPTODATA, TIMEFRAME, LOADING, MINMAX, getCryptoChartData} = useContext(CryptoChartContext);
 
 
     useEffect(() => {
         getCryptoChartData(ReturnCrypto('id'), TIMEFRAME)
+        //eslint-disable-next-line
     }, [])
 
     const SelectedTimeFrame = (type) => {
@@ -21,25 +22,25 @@ const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
     }
 
     const ReturnData = (type) => {
-        if (CRYPTOCHARTDATA) {
+        if (CRYPTODATA) {
             const {min, max} = MINMAX;
 
             if (type === 'data') {
-                return CRYPTOCHARTDATA
+                return CRYPTODATA
             } else if (type === 'min') {
                 return min
             } else if (type === 'max') {
                 return max
             } else if (type ==='LowerY') {
 
-                const MinimumBound = min * 0.98;
+                const MinimumBound = min * 0.97;
                 if (MinimumBound[0] === 0) {
                     return Number(MinimumBound.toFixed(4))
                 } else if (MinimumBound[0] !== 0) {
                     return Number(MinimumBound.toFixed(2))
                 }
             } else if (type === 'HigherY') {
-                const MaximumBound = max * 1.02;
+                const MaximumBound = max * 1.03;
                 if (MaximumBound[0] === 0) {
                     return Number(MaximumBound.toFixed(4))
                 } else if (MaximumBound[0] !== 0) {
@@ -62,7 +63,7 @@ const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
             return <ResponsiveContainer width={'100%'} height={'100%'}>
                         <AreaChart data={ReturnData('data')} margin={{left: 5, right: 10, top: 0, bottom: 0}}>
                             <Area type="monotone" dataKey='Price' stroke="#4141bf" dot={false} fill={'rgba(0,255,255, 0.40)'} />
-                            <YAxis dataKey='price' domain={[ReturnData('LowerY'), ReturnData('HigherY')]} width={YAxisWidth()} type='number'  />
+                            <YAxis dataKey='Price' domain={[ReturnData('LowerY'), ReturnData('HigherY')]} width={YAxisWidth()} type='number'  />
                             <XAxis  dataKey='date'tick={false} margin={{ left: 0, right: 0, top: 0, bottom: 0}} height={15}/>
                             <Tooltip />
                         </AreaChart>
@@ -75,7 +76,7 @@ const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
         <div className='cryptochart cryptochart--primary'>
             <div className='sparkline sparkline--primary'>
 
-                {LOADING ? <div style={{display: 'flex', alignItems: 'center'}}><p >Loading...</p></div> : 
+                {LOADING ? <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Loader/>Loading...</div> : 
                     ReturnData('data') && renderLineChart()
                 }
             </div>
@@ -109,6 +110,17 @@ const CryptoChart = ({ReturnCrypto, setSparklineColor}) => {
                     }}>
                     30D
                 </button>
+            </div>
+            <div className='pricechanges pricechanges--primary'>
+                    <table className='pricechangetable pricechangetable--primary'>
+                        <tr>
+                            <td className='pricechangetable__data'>{ReturnCrypto('priceChange24hr') && `${formatPriceChange(ReturnCrypto('priceChange24hr'))}%`}</td>
+                            <td className='pricechangetable__data'>{ReturnCrypto('priceChange7d') && `${formatPriceChange(ReturnCrypto('priceChange7d'))}%`}</td>
+                            <td className='pricechangetable__data'>{ReturnCrypto('priceChange14d') && `${formatPriceChange(ReturnCrypto('priceChange14d'))}%`}</td>
+                            <td className='pricechangetable__data'>{ReturnCrypto('priceChange30d') && `${formatPriceChange(ReturnCrypto('priceChange30d'))}%`}</td>
+
+                        </tr>
+                    </table>
             </div>
         </div> 
     )

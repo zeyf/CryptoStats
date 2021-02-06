@@ -1,6 +1,6 @@
 import React, {useEffect, useContext} from 'react'
 import TableContext from '../context/TableContext/TableContext'
-import {Sparklines, SparklinesLine, SparklinesSpots} from 'react-sparklines';
+import {Sparklines, SparklinesLine} from 'react-sparklines';
 import FormatFunctions from '../../functions/Formatting Functions/FormatFunctions'
 import {Link} from 'react-router-dom'
 import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
@@ -118,7 +118,7 @@ const Table = () => {
                 </thead>
                 <tbody>
                     {items.map((item, i) => {
-                            const {market_cap_rank, current_price, image, total_volume, symbol, name, price_change_percentage_7d_in_currency, id, sparkline_in_7d, priceChange7d_CG_USD, priceChange1w} = item;
+                            const {market_cap_rank, current_price, image, total_volume, symbol, name, price_change_percentage_7d_in_currency, id, sparkline_in_7d} = item;
                             return <tr className='table__row'>
                             <td className='tablebody__data tablebody__data--rank'>{LOADING ?  SkeletonType('rank'): market_cap_rank}</td>
                             <td className='tablebody__data tablebody__data--name'>

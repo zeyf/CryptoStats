@@ -2,11 +2,7 @@ import {
     SET_LOADING,
     GET_CRYPTO_CHART_DATA,
     SET_CRYPTO_TIME_FRAME,
-    SET_MIN_MAX_PRICE,
-    SET_1D_DATA,
-    SET_7D_DATA,
-    SET_14D_DATA,
-    SET_30D_DATA
+    SET_MIN_MAX_PRICE
 } from '../../types';
 
 
@@ -23,7 +19,7 @@ const CryptoChartReducer = (state, action) => {
         case GET_CRYPTO_CHART_DATA:
             return {
                 ...state,
-                CRYPTOCHARTDATA: action.payload,
+                CRYPTODATA: action.payload,
                 LOADING: false
             }
         case SET_CRYPTO_TIME_FRAME:

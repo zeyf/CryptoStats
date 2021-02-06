@@ -4,6 +4,7 @@ import CryptoContext from './CryptoContext';
 import {
     SET_LOADING,
     SET_CRYPTO,
+    SET_TICKER_SORT_FIELD
 } from '../types'
 import axios from 'axios';
 
@@ -12,6 +13,7 @@ const CryptoState = ({children}) => {
     const InitialState = {
         LOADING: false,
         CRYPTO: null,
+        TICKERSORTEDFIELD: null
     };
 
     const SetLoading = () => {
@@ -28,13 +30,22 @@ const CryptoState = ({children}) => {
         });
     }
 
+    const setTickerSortField = (field) => {
+        dispatch({
+            type: SET_TICKER_SORT_FIELD,
+            payload: field
+        })
+    }
+
 
     const [state, dispatch] = useReducer(CryptoReducer, InitialState);
 
     return <CryptoContext.Provider value={{
        CRYPTO: state.CRYPTO,
        LOADING: state.LOADING,
-       GetCrypto
+       TICKERSORTEDFIELD: state.TICKERSORTEDFIELD,
+       GetCrypto,
+       setTickerSortField
     }}>
         {children}
     </CryptoContext.Provider>;

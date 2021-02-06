@@ -1,4 +1,4 @@
-import { SET_LOADING, SET_CRYPTO } from '../types'
+import { SET_LOADING, SET_CRYPTO, SET_TICKER_SORT_FIELD} from '../types'
 
 const CryptoReducer = (state, action) => {
     switch(action.type) {
@@ -14,6 +14,11 @@ const CryptoReducer = (state, action) => {
                 ...state,
                 CRYPTO: action.payload,
                 LOADING: false
+            }
+        case SET_TICKER_SORT_FIELD:
+            return {
+                ...state,
+                TICKERSORTEDFIELD: action.payload
             }
     }
 

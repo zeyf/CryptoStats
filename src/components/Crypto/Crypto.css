@@ -176,7 +176,8 @@
 }
 
 .maindetailsubcont4__head {
-    padding-left: 10px;
+    text-align: center;
+    font-size: 1.25em;
 }
 
 .maindetailsubcont4__table {
@@ -193,9 +194,17 @@
 }
 
 .maindetailsubcont4__tabledata1 {
-    font-weight: 600;
+    width: 50%;
     padding: 10px 0px 10px 10px;
+    font-family: 'Roboto-Light', sans-serif;
+    
+}
 
+.maindetailsubcont4__tabledata2 {
+    font-family: 'Roboto-Light', sans-serif;
+    text-align: left;
+    width: 50%;
+    padding: 10px 0px 10px 10px;
 }
 
 

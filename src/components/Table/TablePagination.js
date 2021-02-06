@@ -1,10 +1,9 @@
 import TableContext from '../context/TableContext/TableContext'
 import React, {useContext} from 'react'
 import './TablePagination.css'
-import useSortableData from './useSortableData'
 
 const TablePagination = ({ShowRowsPerPage}) => {
-    const {CURRENTPAGE, ROWSPERPAGE, CRYPTOS, setCurrentPage, setRowsPerPage} = useContext(TableContext);
+    const {CURRENTPAGE, ROWSPERPAGE, setCurrentPage, setRowsPerPage} = useContext(TableContext);
     const totalPages = (500/ROWSPERPAGE);
     const PageNumbers = [];
     for (let i=1; i < (totalPages + 1); i++) {
@@ -36,8 +35,6 @@ const TablePagination = ({ShowRowsPerPage}) => {
             return {visibility: 'hidden'}
         }
     }
-
-    const { items, requestSort } = useSortableData(CRYPTOS);
     
     const RowPerPageonChange = (event) => {
         setRowsPerPage(event.target.value);

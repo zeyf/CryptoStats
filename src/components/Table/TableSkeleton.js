@@ -2,7 +2,6 @@ import {useContext} from 'react'
 import './Table.css'
 import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
 import {Link} from 'react-router-dom'
-import useSortableData from './useSortableData'
 import TableContext from '../context/TableContext/TableContext'
 
 

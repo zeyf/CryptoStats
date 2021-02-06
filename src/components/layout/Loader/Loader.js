@@ -1,10 +1,10 @@
 import React from 'react'
-import loadingpulse from '../../../images/loading.svg'
+import loader from '../../../images/loaderchart.svg'
 
 const Spinner = () => {
     return (
-        <div>
-            <img src={loadingpulse} alt='loading spinner' />
+        <div style={{width: '50%', height: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <img style={{width: '50%', height: '50%'}} src={loader} alt='loading spinner' />
         </div>
     )
 }

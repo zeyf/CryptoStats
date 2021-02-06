@@ -1,0 +1,59 @@
+.extrainfo--primary {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.tickers--primary {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.tickers__head {
+    text-align: center;
+    font-size: 1.25em;
+}
+
+.tickers__scrollable {
+    overflow: scroll;
+    height: 25vh;
+    width: 100%;
+}
+
+.tickers__table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tickers_headrow {
+    border-top: 1px solid #cececf;
+    border-bottom: 1px solid #cececf;
+}
+
+.tickers__headcol {
+    padding: 10px;
+}
+
+.tickers__row {
+    border-bottom: 1px solid #cececf;
+}
+
+
+.tickers__dataexchange {
+    padding: 10px;
+    text-align: center;
+    font-family: 'Roboto-Light', sans-serif;
+    font-weight: 800;
+}
+
+.tickers__data {
+    padding: 10px;
+    text-align: center;
+    font-family: 'Roboto-Light', sans-serif;
+}
+
+.tickers_link {
+    text-decoration-line: none; 
+    font-weight: bold;
+}

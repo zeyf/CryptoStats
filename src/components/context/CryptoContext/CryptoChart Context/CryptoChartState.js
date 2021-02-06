@@ -4,19 +4,15 @@ import CryptoChartReducer from './CryptoChartReducer'
 import axios from 'axios';
 import {
     SET_LOADING,
-    GET_CRYPTO_CHART_DATA,
     SET_CRYPTO_TIME_FRAME,
+    GET_CRYPTO_CHART_DATA,
     SET_MIN_MAX_PRICE,
-    SET_1D_DATA,
-    SET_7D_DATA,
-    SET_14D_DATA,
-    SET_30D_DATA
 } from '../../types';
 
 const CryptoChartState = ({children}) => {
     
     const InitialState = {
-        CRYPTOCHARTDATA: null,
+        CRYPTODATA: null,
         MINMAX: null,
         TIMEFRAME: 1,
         LOADING: false,
@@ -33,12 +29,9 @@ const CryptoChartState = ({children}) => {
         if (CryptoID) {
             SetLoading();
             setTimeFrame(TimeFrame);
-            const Data1D = await axios.get(`https://api.coingecko.com/api/v3/coins/${CryptoID}/market_chart?vs_currency=usd&days=${TimeFrame}`);
-            const Data2 = await axios.get(`https://api.coingecko.com/api/v3/coins/${CryptoID}/market_chart?vs_currency=usd&days=7`);
-            const Data3 = await axios.get(`https://api.coingecko.com/api/v3/coins/${CryptoID}/market_chart?vs_currency=usd&days=14`);
-            const Data4 = await axios.get(`https://api.coingecko.com/api/v3/coins/${CryptoID}/market_chart?vs_currency=usd&days=30`);
+            const Data = await axios.get(`https://api.coingecko.com/api/v3/coins/${CryptoID}/market_chart?vs_currency=usd&days=${TimeFrame}`);
 
-            const TimeFramePriceData = Data1D.data.prices;
+            const TimeFramePriceData = Data.data.prices;
             const Prices = TimeFramePriceData.map((daydataset, i) => {
                 if (String(daydataset)[0] !== '0') return Number(daydataset[daydataset.length - 1].toFixed(2))
                 if (String(daydataset)[0] === '0') return Number(daydataset[daydataset.length - 1].toFixed(4))
@@ -96,7 +89,7 @@ const CryptoChartState = ({children}) => {
 
     return <CryptoChartContext.Provider value={{
             
-            CRYPTOCHARTDATA: state.CRYPTOCHARTDATA,
+            CRYPTODATA: state.CRYPTODATA,
             TIMEFRAME: state.TIMEFRAME,
             LOADING: state.LOADING,
             MINMAX: state.MINMAX,

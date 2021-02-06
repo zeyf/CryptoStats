@@ -2,9 +2,9 @@ import React, {useEffect, useContext} from 'react'
 import CryptoContext from '../context/CryptoContext/CryptoContext'
 import FormatFunctions from '../../functions/Formatting Functions/FormatFunctions'
 import CryptoSkeleton from './CryptoSkeleton'
-import {Sparklines, SparklinesLine} from 'react-sparklines';
 import CryptoChart from './CryptoChart/CryptoChart';
 import './Crypto.css'
+import ExtraInfo from './Extra Info/ExtraInfo'
 
 const Crypto = ({match}) => {
 
@@ -12,14 +12,13 @@ const Crypto = ({match}) => {
     
         useEffect(() => {
             GetCrypto(match.params.CryptoID);
+            //eslint-disable-next-line
         }, [])
 
         const {
             newVol,
             newPrice,
-            setPriceColor,
             addDirectionalTriangle,
-            setSparklineColor,
             format1DpriceChange,
             nameShortener,
             setCryptoPriceBGColor
@@ -29,7 +28,7 @@ const Crypto = ({match}) => {
         const ReturnCrypto = (type, subtype) => {
             if (CRYPTO) {
                 
-                const {name, id, image, symbol, market_cap_rank, market_data, genesis_date, description, categories, links} = CRYPTO;
+                const {name, id, image, symbol, market_cap_rank, market_data, genesis_date, description, categories, links, tickers} = CRYPTO;
 
                 const {
 
@@ -44,7 +43,6 @@ const Crypto = ({match}) => {
                     price_change_percentage_14d_in_currency,
                     price_change_percentage_30d_in_currency,
                     total_volume,
-                    tickers,
                     sparkline_7d,
                     ath,
                     ath_date,
@@ -150,7 +148,7 @@ const Crypto = ({match}) => {
                 <div className='maindetails maindetails--primary'>
                     <div className='maindetailcont1 maindetailcont1--primary'>
                         <div className='maindetailsubcont1 maindetailsubcont1--primary'>
-                            <img className='maindetailsubcont1__image' src={ReturnCrypto('image')} />
+                            <img className='maindetailsubcont1__image' src={ReturnCrypto('image')} alt={`${ReturnCrypto('name')} ${ReturnCrypto('symbol')} icon`} />
                             <h1 className='maindetailsubcont1__name'>
                                 {ReturnCrypto('name') && `${nameShortener(ReturnCrypto('name'))} (${ReturnCrypto('symbol')})`}
                             </h1>
@@ -205,14 +203,14 @@ const Crypto = ({match}) => {
                         <div className='maindetailsubcont3 maindetailsubcont3--primary'>
                             {ReturnCrypto('links', 'blockchain_site') && ReturnCrypto('links', 'blockchain_site').map((item, i) => {
                                 if(item) {
-                                    return <a className='maindetailsubcont3__link' href={item} target='_blank'>Blockchain Explorer {++i}</a>
+                                    return <a className='maindetailsubcont3__link' href={item} target='_blank' rel='noreferrer'>Blockchain Explorer {++i}</a>
                                 }
                             })}
                         </div>
                     </div>
                 </div>
                 <div className='statsection statsection--primary'>
-                    <CryptoChart ReturnCrypto={ReturnCrypto} setSparklineColor={setSparklineColor} />
+                    <CryptoChart ReturnCrypto={ReturnCrypto} formatPriceChange={format1DpriceChange} />
                     <div className='maindetailcont4 maindetailcont4--primary'>
                             <div className='maindetailsubcont4 maindetailsubcont4--primary'>
                                 <h4 className='maindetailsubcont4__head'>
@@ -315,9 +313,13 @@ const Crypto = ({match}) => {
                                     </tbody>
                                 </table>
                             </div>
-                            
                     </div>
                 </div>
+                <ExtraInfo 
+                    formatPrice={newPrice} 
+                    ReturnCrypto={ReturnCrypto}
+                    formatSpread={format1DpriceChange}
+                />
             </div>
             }
         </div>
