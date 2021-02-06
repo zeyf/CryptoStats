@@ -32,7 +32,17 @@
 }
 
 .tickers__headcol {
+    margin: 0px;
+    padding: 0px;
+}
+
+.tickers__headcolbutton {
+    width: 100%;
+    margin: 0px;
     padding: 10px;
+    border: none;
+    cursor: pointer;
+    color: rgb(176, 176, 177);
 }
 
 .tickers__row {

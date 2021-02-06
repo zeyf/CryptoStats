@@ -58,7 +58,7 @@ const FormatFunctions = {
                 if (DecimalSplit[1].length === 1) {
                     return `${BeforeDecimal}.${DecimalSplit[1]}0`
                 } else {
-                    return `${BeforeDecimal}.${DecimalSplit[1]}`
+                    return `${BeforeDecimal}.${DecimalSplit[1][0]}${DecimalSplit[1][1]}`
                 }
             } else {
                 return `${BeforeDecimal}.00`
