@@ -76,7 +76,7 @@ const CryptoChart = ({ReturnCrypto, formatPriceChange}) => {
         <div className='cryptochart cryptochart--primary'>
             <div className='sparkline sparkline--primary'>
 
-                {LOADING ? <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Loader/>Loading...</div> : 
+                {LOADING ? <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Loader />Loading...</div> : 
                     ReturnData('data') && renderLineChart()
                 }
             </div>
