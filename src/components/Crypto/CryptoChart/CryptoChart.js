@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react'
 import {useContext} from 'react';
 import CryptoChartContext from '../../context/CryptoContext/CryptoChart Context/CryptoChartContext';
-// import CryptoChartSkeleton from './CryptoChartSkeleton'
 import {XAxis, YAxis, Tooltip, ResponsiveContainer, Area, AreaChart} from 'recharts'
 import Loader from '../../layout/Loader/Loader'
 import './CryptoChart.css'
