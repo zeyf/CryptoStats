@@ -25,6 +25,13 @@ const Table = () => {
     
     const { items, requestSort } = useSortableData(CRYPTOS);
 
+    const getClassNamesFor = (name) => {
+        if (!SORTEDFIELD) {
+          return;
+        }
+        return SORTEDFIELD.key === name ? SORTEDFIELD.direction : undefined;
+    };
+
     useEffect(() => {
         GetCryptos(CURRENTPAGE, ROWSPERPAGE);
         if (SORTEDFIELD) {
@@ -82,32 +89,33 @@ const Table = () => {
     return (
         <div className='tablecomponent tablecomponent--primary'>
             <TablePagination />
+            <div className='tablescrollable tablescrollable--primary'>
             {!INITIALLOADING ? <TableSkeleton /> : <>
              <table className='table table--primary'>
                 <thead className='table__head'>
                     <tr className='table__head__row'>
                         <th className='table__headcol table__headcol--rank'>
-                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('market_cap_rank')}} >
+                            <button className={`${getClassNamesFor('market_cap_rank')} table__headcol__button`} style={{width: '100%'}} onClick={() => {requestSort('market_cap_rank')}} >
                              #
                             </button>
                         </th>
                         <th className='table__headcol table__headcol--name'>
-                            <button className='table__headcol__button table__headcol__button--name' style={{width: '100%'}} onClick={() => {requestSort('name')}}>
+                            <button className={`${getClassNamesFor('name')} table__headcol__button table__headcol__button--name`} style={{width: '100%'}} onClick={() => {requestSort('name')}}>
                                 NAME
                             </button>
                         </th>
                         <th className='table__headcol table__headcol--pricechange24h'>
-                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('price_change_percentage_7d_in_currency')}}>
+                            <button className={`${getClassNamesFor('price_change_percentage_7d_in_currency')} table__headcol__button`} style={{width: '100%'}} onClick={() => {requestSort('price_change_percentage_7d_in_currency')}}>
                                 24H CHANGE
                             </button>
                         </th>
                         <th className='table__headcol table__headcol--price'>
-                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('current_price')}}>
+                            <button className={`${getClassNamesFor('current_price')} table__headcol__button`} style={{width: '100%'}} onClick={() => {requestSort('current_price')}}>
                                 PRICE
                             </button>
                         </th>
                         <th className='table__headcol table__headcol--volume'>
-                            <button className='table__headcol__button' style={{width: '100%'}} onClick={() => {requestSort('total_volume')}}>
+                            <button className={`${getClassNamesFor('total_volume')} table__headcol__button`} style={{width: '100%'}} onClick={() => {requestSort('total_volume')}}>
                                 24H VOLUME
                             </button>
                         </th>
@@ -147,6 +155,7 @@ const Table = () => {
                 </table>
             </>
             }
+            </div>
             <TablePagination />
         </div>
     )

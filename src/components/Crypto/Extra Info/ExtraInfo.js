@@ -6,6 +6,15 @@ import './ExtraInfo.css'
 const ExtraInfo = ({ReturnCrypto, formatPrice, formatSpread}) => {
 
     
+    const {TICKERSORTEDFIELD} = useContext(CryptoContext);
+
+    const getClassNamesFor = (name) => {
+        if (!TICKERSORTEDFIELD) {
+          return;
+        }
+        return TICKERSORTEDFIELD.key === name ? TICKERSORTEDFIELD.direction : undefined;
+      };
+
     const DestructuredTickers = () => {
         
         if (ReturnCrypto('tickers')) {
@@ -27,7 +36,7 @@ const ExtraInfo = ({ReturnCrypto, formatPrice, formatSpread}) => {
             
         }
     }
-    {console.log(DestructuredTickers())}
+
     const {items, requestSort} = useTickerSortableData(DestructuredTickers());
 
         return (
@@ -42,35 +51,35 @@ const ExtraInfo = ({ReturnCrypto, formatPrice, formatSpread}) => {
                         <thead className='tickers_thead'>
                             <tr className='tickers_headrow'>
                                 <th className='tickers__headcol'>
-                                    <button className='tickers__headcolbutton' onClick={() => {
+                                    <button className={`${getClassNamesFor('exchangename')} tickers__headcolbutton`} onClick={() => {
                                         requestSort('exchangename')
                                     }}>
                                         EXCHANGE
                                     </button>
                                 </th>
                                 <th className='tickers__headcol'>
-                                    <button className='tickers__headcolbutton' onClick={() => {
+                                    <button className={`${getClassNamesFor('pair')} tickers__headcolbutton`} onClick={() => {
                                         requestSort('pair')
                                     }}>
                                         PAIR
                                     </button>
                                 </th>
                                 <th className='tickers__headcol'>
-                                    <button className='tickers__headcolbutton' onClick={() => {
+                                    <button className={`${getClassNamesFor('lasttradeinusd')} tickers__headcolbutton`} onClick={() => {
                                         requestSort('lasttradeinusd')
                                     }}>
                                         PRICE
                                     </button>
                                 </th>
                                 <th className='tickers__headcol'>
-                                    <button className='tickers__headcolbutton' onClick={() => {
+                                    <button className={`${getClassNamesFor('bid_ask_spread_percentage')} tickers__headcolbutton`} onClick={() => {
                                         requestSort('bid_ask_spread_percentage')
                                     }}>
                                         SPREAD
                                     </button>
                                 </th>
                                 <th className='tickers__headcol'>
-                                    <button className='tickers__headcolbutton' onClick={() => {
+                                    <button className={`${getClassNamesFor('volume')} tickers__headcolbutton`} onClick={() => {
                                         requestSort('volume')
                                     }}>
                                         24H VOLUME

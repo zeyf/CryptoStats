@@ -24,6 +24,7 @@
 .tickers__table {
     border-collapse: collapse;
     width: 100%;
+    position: relative;
 }
 
 .tickers_headrow {
@@ -34,6 +35,11 @@
 .tickers__headcol {
     margin: 0px;
     padding: 0px;
+    top: 0;
+    position: sticky;
+    width: 20vw;
+
+
 }
 
 .tickers__headcolbutton {
@@ -42,8 +48,12 @@
     padding: 10px;
     border: none;
     cursor: pointer;
-    color: rgb(176, 176, 177);
+    color: #11698e;
+    outline: none;
+
 }
+
+
 
 .tickers__row {
     border-bottom: 1px solid #cececf;
@@ -66,4 +76,16 @@
 .tickers_link {
     text-decoration-line: none; 
     font-weight: bold;
+}
+
+
+button.ascending::after {
+    content: '👇';
+    display: inline-block;
+    position: absolute;
+}
+button.descending::after {
+    content: '☝️';
+    display: inline-block;
+    position: absolute;
 }
