@@ -4,20 +4,60 @@ import {Link} from 'react-router-dom'
 import MenuIcon from '../../../images/MobileMenuIcon.svg'
 import XIcon from '../../../images/XCloseIcon.svg'
 import CryptoContext from '../../context/CryptoContext/CryptoContext';
+import axios from 'axios';
 
 
 const Navbar = () => {
 
     const [showMenu, setShowMenu] = useState(false)
     const [searchedCrypto, setSearchedCrypto] = useState(null)
-    const {GetCrypto} = useContext(CryptoContext)
+    const [cryptoList, setCryptoList] = useState(null)
 
+    const {GetCrypto} = useContext(CryptoContext)
 
     const onSubmit = (event) => {
         event.preventDefault();
     }
     const searchOnChange = (event) => {
-        setSearchedCrypto((event.target.value).toLowerCase());
+        if (cryptoList) {
+            const filterChange = cryptoList.filter((crypto, i) => {
+                const {symbol, id} = crypto;
+                if (symbol === event.target.value) {
+                    return id
+                }
+            })
+            if (filterChange[0]) {
+                setSearchedCrypto((filterChange[0].id).toLowerCase())
+                return filterChange[0]
+            } else {
+
+                setSearchedCrypto((event.target.value).toLowerCase());
+            }
+        }
+
+    }
+
+    const GetCryptoList = async () => {
+        const response = await axios.get('https://api.coingecko.com/api/v3/coins/list');
+        setCryptoList(response.data)
+    }
+
+    useEffect(() => {
+        GetCryptoList()
+    }, [])
+
+    const FindCryptoBySymbol = (symbolSearched) => {
+        console.log(symbolSearched)
+        if (cryptoList) {
+            const searchList = [searchedCrypto];
+            
+            cryptoList.filter((crypto, i) => {
+                const {symbol, id} = crypto;
+                if (symbol === symbolSearched) {
+                    return id
+                }
+            })
+        }
     }
 
     return (
@@ -68,6 +108,7 @@ const Navbar = () => {
                                     <Link to={`/cryptocurrencies/${searchedCrypto}`}>
                                         <button type='submit' onClick={() => {
                                             setShowMenu(false);
+                                            FindCryptoBySymbol(searchedCrypto)
                                             GetCrypto(searchedCrypto);
                                         }}>
                                             GO

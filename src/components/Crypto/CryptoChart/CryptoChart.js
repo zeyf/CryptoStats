@@ -61,7 +61,7 @@ const CryptoChart = ({ReturnCrypto, formatPriceChange}) => {
 
             return <ResponsiveContainer width={'100%'} height={'100%'}>
                         <AreaChart data={ReturnData('data')} margin={{left: 5, right: 10, top: 0, bottom: 0}}>
-                            <Area type="monotone" dataKey='Price' stroke="#4141bf" dot={false} fill={'rgba(0,255,255, 0.40)'} />
+                            <Area type="monotone" dataKey='Price' stroke="#095441" dot={false} fill={'#17D4A5'} />
                             <YAxis dataKey='Price' domain={[ReturnData('LowerY'), ReturnData('HigherY')]} width={YAxisWidth()} type='number'  />
                             <XAxis  dataKey='date'tick={false} margin={{ left: 0, right: 0, top: 0, bottom: 0}} height={15}/>
                             <Tooltip />
