@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# PROJECT TITLE
+  - CRYPTOSTATS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# DESCRIPTION
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  - CryptoStats is a cryptocurrency price and market capitalization viewer. Currently able to view are the top 500 cryptocurrencies and their current information like price, market capitalization, total supply, circulation supply, etcetera, along with respective statistics across various timeframes and data visualization in the form of                sparklines and interactive charts.
+  
+ # HOW IT'S MADE
+ 
+  LANGUAGES/LIBRARIES/TOOLS:
+  
+    - HTML
+    - CSS
+    - JAVASCRIPT
+    - REACT
+    - NPM
+  
+  REACT REQUIRED DEPENDENCIES:
+  
+    - AXIOS (Used to interact with the API, primarily for GET requests)
+    - RECHARTS (Used for the interactive data visualization in the form of charts)
+    - REACT-LOADING-SKELETON (Used to implement the grey loading animation bars while dynamic content is being pulled)
+    - REACT-ROUTER-DOM (Used for routing components and links, as well as using link match parameters to search specific cryptocurrency data)
+    - REACT-SPARKLINES (Used for the "PRICE 7D" visualized data of price from the last 7 days in for each cryptocurrency shown in the main table. Not interactive.)
