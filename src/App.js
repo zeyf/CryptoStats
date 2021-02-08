@@ -1,4 +1,5 @@
 import './App.css';
+import {useState} from 'react'
 import TableState from './components/context/TableContext/TableState';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navbar from './components/layout/Navbar/Navbar';
@@ -11,13 +12,21 @@ import NotFound from './components/layout/Not Found/NotFound';
 
 const App = () => {
 
+  const [darkMode, setDarkMode] = useState(false);
+
+  const ChangeStyle = (type) => {
+    if (darkMode && type === 'BGandColor') return {backgroundColor: '#252525', color: 'white'}
+  }
+
   return (
+    <body style={ChangeStyle()}>
     <div className="App">
       <TableState>
         <CryptoState>
           <CryptoChartState>
             <Router>
-              <Navbar key='navbar' />
+              <Navbar key='navbar' darkMode={darkMode} setDarkMode={setDarkMode} 
+              ChangeStyle={ChangeStyle} />
               <Switch>
                 <Route exact path='/' component={Table} />
                 <Route exact path='/cryptocurrencies' component={Table} />
@@ -30,6 +39,7 @@ const App = () => {
         </CryptoState>
       </TableState>
     </div>
+    </body>
   );
 }
 
