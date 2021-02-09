@@ -10,7 +10,7 @@ import axios from 'axios';
 const Navbar = ({darkMode, setDarkMode, ChangeStyle}) => {
 
     const [showMenu, setShowMenu] = useState(false)
-    const [searchedCrypto, setSearchedCrypto] = useState(null)
+    const [searchedCrypto, setSearchedCrypto] = useState('')
     const [cryptoList, setCryptoList] = useState(null)
     const [searchResultList, setSearchResultList] = useState(null)
 
@@ -51,6 +51,10 @@ const Navbar = ({darkMode, setDarkMode, ChangeStyle}) => {
         setCryptoList(response.data)
     }
 
+    const WindowSize = () => {
+        if (window.screen.width > 1024) return 'desktop'
+    }
+
     useEffect(() => {
         GetCryptoList()
     }, [])
@@ -74,14 +78,7 @@ const Navbar = ({darkMode, setDarkMode, ChangeStyle}) => {
                                         </Link>
                                     </li>
                                     <li className='menulistsection__option'>
-                                        <Link className='menulistsection__optionlink'  to='/cryptocurrencies' onClick={() => {
-                                            setShowMenu(false);
-                                        }}>
-                                            CRYPTOCURRENCIES
-                                        </Link>
-                                    </li>
-                                    <li className='menulistsection__option'>
-                                        <Link className='menulistsection__optionlink'  to='' onClick={() => {
+                                        <Link className='menulistsection__optionlink'  to='/aboutus' onClick={() => {
                                             setShowMenu(false);
                                         }}>
                                             ABOUT US
@@ -98,15 +95,17 @@ const Navbar = ({darkMode, setDarkMode, ChangeStyle}) => {
                                 <div className='searchsection searchsection--primary'>
                                     <form className='searchsection__form' onSubmit={onSubmit}>
                                         <div className='searchsection__searcharea'>
-                                            <input className='searchsection__input' placeholder='Search crypto by name...' required onChange={searchOnChange}/>
+                                            <input className='searchsection__input' placeholder='Search by name or symbol' required onChange={searchOnChange} onBlur={(event) => {
+                                                event.target.value = ''
+                                            }}/>
                                             <Link className='searchsection__link' to={`/cryptocurrencies/${searchedCrypto}`}>
                                                 <button className='searchsection__button' type='submit' onClick={() => {
                                                     setShowMenu(false);
                                                     GetCrypto(searchedCrypto);
-                                                    setSearchedCrypto(null)
+                                                    setSearchedCrypto('')
                                                     setSearchResultList(null)
                                                 }}>
-                                                    GO
+                                                    🚀
                                                 </button>
                                             </Link>
                                         </div>
@@ -118,29 +117,39 @@ const Navbar = ({darkMode, setDarkMode, ChangeStyle}) => {
                                                         <Link className='searchsection__resultsoptionlink' to={`/cryptocurrencies/${id}`} onClick={() => {
                                                             setShowMenu(false);
                                                             GetCrypto(id);
-                                                            setSearchedCrypto(null)
+                                                            setSearchedCrypto('')
                                                             setSearchResultList(null)
                                                         }}>
                                                             {name} ({symbol.toUpperCase()})
                                                         </Link>
                                                     </li>
-                                        
-                                        })}                                      
+                                                })}                                      
                                     </ul>
                                 </div>
-                                <button className='menulistsection__button' onClick={() => {
-                                    if (!darkMode) setDarkMode(true)
-                                    if (darkMode) setDarkMode(false)
-                                }}>
-                                    DARK MODE
-                                </button>
                             </div>
                          </div>
             }
             <Link className='navbarlogo__link' to='/' style={{position: 'absolute'}}>
                 <span className='navbar__span'>cryptostats 🚀🌕</span>
             </Link>
-            <div className='navbaroverlay navbarunderlay--primary'>
+            <div className='navbarunderlay navbarunderlay--primary'>
+                <div className='search search--primary'>
+                    <form onSubmit={onSubmit} className='search__form'>
+                        <input placeholder='Search name or symbol' className='search__input' required onChange={searchOnChange} onBlur={(event) => {
+                            event.target.value = ''
+                        }} />
+                        <Link to={`/cryptocurrencies/${searchedCrypto}`}>
+                            <button className='search__button' type='submit' onClick={() => {
+                                setShowMenu(false);
+                                GetCrypto(searchedCrypto);
+                                setSearchedCrypto('')
+                                setSearchResultList(null)
+                            }}>
+                                🚀
+                            </button>
+                        </Link>
+                    </form>
+                </div>
                 <div className='navbarmenu navbarmenu--primary'>
                     <img className='navbarmenu__icon' src={MenuIcon} alt='cryptocurrency website mobile menu icon' onClick={() => {
                         if (showMenu) setShowMenu(false);

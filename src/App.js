@@ -9,6 +9,7 @@ import CryptoState from './components/context/CryptoContext/CryptoState'
 import CryptoChartState from './components/context/CryptoContext/CryptoChart Context/CryptoChartState'
 import Footer from './components/layout/Footer/Footer'
 import NotFound from './components/layout/Not Found/NotFound';
+import About from './components/About/About';
 
 const App = () => {
 
@@ -31,6 +32,7 @@ const App = () => {
                 <Route exact path='/' component={Table} />
                 <Route exact path='/cryptocurrencies' component={Table} />
                 <Route exact path='/cryptocurrencies/:CryptoID' component={Crypto} />
+                <Route exact path='/aboutus' component={About} />
                 <Route component={NotFound} />
               </Switch>
               <Footer />

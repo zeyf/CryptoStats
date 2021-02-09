@@ -33,6 +33,7 @@
     justify-content: center;
     border: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .paginationul__button:hover {
@@ -47,16 +48,45 @@
 @media only screen and (max-width: 700px) {
     .pagination--primary {
         width: 100%;
+        justify-content: space-between;
     }
     .paginationul__button {
         height: 4.5vh;
         width: 4.5vh;
         font-size: 3.5em;
     }
+
+    .rowperpage--primary {
+        margin: 0px 10px;
+    }
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 700px)  {
     .pagination--primary {
-        width: 100%;
+        width: 90%;
+        justify-content: space-between;
+
+    }
+
+    .paginationul__button {
+        margin: 0px 15px;
+    }
+
+    .rowperpage--primary {
+        margin: 0px 10px;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    .pagination--primary {
+        width: 90%;
+        justify-content: space-between;
+    }
+    
+    .paginationul__button {
+        margin: 0px 15px;
+    } 
+    .rowperpage--primary {
+        margin: 0px 10px;
     }
 }

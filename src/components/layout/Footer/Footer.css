@@ -3,4 +3,80 @@
     height: 20vh;
     width: 100%;
     border-top: 10px solid #11698e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.connectwithdev--primary {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.connectwithdev__aboutlink {
+    text-decoration: none;
+    color: #17D4A5;
+    font-weight: 700;
+    width: 50%;
+    padding: 15px 50px;
+    text-align: center;
+    background-color: white;
+    border-radius: 25px;
+    transition: 0.5s;
+}
+
+.connectwithdev__aboutlink:hover {
+    opacity: 0.5;
+}
+
+.connectwithdev__text {
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+.icons--primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icons__icon {
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.icons__link {
+    padding: 0px;
+    padding: 0px;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0px 10px;
+}
+
+.icons__icon:hover {
+    opacity: 0.50;
+}
+
+@media only screen and (max-width: 700px) {
+    .connectwithdev--primary {
+        width: 100%;
+        padding: 10px 0px;
+    }
+
+    .footer--primary {
+        height: 22.55vh;
+    }
+
 }

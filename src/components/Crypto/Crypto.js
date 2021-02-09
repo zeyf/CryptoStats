@@ -5,6 +5,7 @@ import CryptoSkeleton from './CryptoSkeleton'
 import CryptoChart from './CryptoChart/CryptoChart';
 import './Crypto.css'
 import ExtraInfo from './Extra Info/ExtraInfo'
+import {Helmet} from 'react-helmet'
 
 const Crypto = ({match}) => {
 
@@ -142,6 +143,9 @@ const Crypto = ({match}) => {
         return (
         
         <div className='crypto crypto--primary'>
+            <Helmet>
+                <title>{LOADING ? 'LOADING... CRYPTOSTATS 🚀💰' :  `${ReturnCrypto('name')} / ${ReturnCrypto('symbol')} $${newPrice(ReturnCrypto('current_price'))} - CRYPTOSTATS.US - ${ReturnCrypto('name')} price, ${ReturnCrypto('symbol')} market cap data, ${ReturnCrypto('symbol')} 1 day 7 day 14 day 30 day timeframe live cryptocurrency chart`}</title>
+            </Helmet>
             {LOADING ? <CryptoSkeleton /> :
 
             <div className='cryptoinfo cryptoinfo--primary'>

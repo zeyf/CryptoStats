@@ -1,0 +1,131 @@
+.about--primary {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 80vh;
+}
+
+.about__image {
+    height: 40vh;
+    width: 40%;
+}
+
+.abouttext--primary {
+
+    width: 60%;
+}
+
+.abouttext__head {
+    font-family: 'Roboto-Light', sans-serif;
+    padding: 0px;
+    margin: 0px;
+}
+
+.abouttext__text {
+    text-align: left;
+    text-indent: 1em;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    width: 80%;
+}
+
+.infoicons__icon {
+    height: 50px;
+    width: 50px;
+
+}
+
+.infoicons--primary {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+}
+
+.infoicons__icon {
+    margin: 0px 10px;
+    transition: 0.5s;
+}
+
+.infoincons__text {
+    font-weight: 700;
+    font-size: 1em;
+}
+
+.infoicons__icon:hover {
+    opacity: 0.75;
+}
+
+@media only screen and (max-width: 700px) {
+    .about--primary {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 80vh;
+    }
+
+    .about__image {
+        height: 25vh;
+        width: 90%;
+    }
+    
+    .abouttext--primary {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .abouttext__head {
+        font-family: 'Roboto-Light', sans-serif;
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    .abouttext__text {
+        text-align: left;
+        text-indent: 1em;
+        font-family: 'Roboto-Light', sans-serif;
+        font-size: 1em;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .infoicons--primary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+
+    .infoincons__text {
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .infoicons__icon {
+        margin: 0px 10px;
+    }
+}
+
+
+@media only screen and (max-height: 400px) {
+    .about--primary {
+        height: 125vh;
+    }
+    .about__image {
+        height:55vh;
+    }
+
+    .abouttext__text {
+        font-size: 1em;
+    }
+
+    .abouttext__head {
+        margin-bottom: 40px;
+    }
+}

@@ -35,3 +35,8 @@ body {
   margin: 0px;
   font-family: 'Roboto';
 }
+
+
+input, textarea, button, select, a, img {
+  -webkit-tap-highlight-color: transparent;
+}

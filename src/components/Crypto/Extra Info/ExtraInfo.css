@@ -8,6 +8,7 @@
 .tickers--primary {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
 }
 
@@ -20,6 +21,7 @@
     overflow: scroll;
     height: 25vh;
     width: 100%;
+    margin: 0px 0px 20px 0px;
 }
 
 .tickers__table {
@@ -89,4 +91,12 @@ button.descending::after {
     content: '☝️';
     display: inline-block;
     position: absolute;
+}
+
+@media only screen and (max-height: 400px) {
+    .tickers__scrollable {
+        height: 50vh;
+        width: 100%;
+    }
+
 }

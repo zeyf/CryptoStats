@@ -293,6 +293,10 @@
         display: none;
     }
 
+    .maindetailsubcont1__priceChange24hr {
+        font-size: 0.85em;
+    }
+
 }
 
 @media only screen and (min-height: 400px) and (max-height: 600px) {

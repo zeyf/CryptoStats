@@ -8,6 +8,7 @@ import useSortableData from './useSortableData'
 import TablePagination from './TablePagination'
 import './Table.css'
 import TableSkeleton from './TableSkeleton'
+import {Helmet} from 'react-helmet';
 
 const Table = () => {
 
@@ -33,7 +34,7 @@ const Table = () => {
     };
 
     useEffect(() => {
-        GetCryptos(CURRENTPAGE, ROWSPERPAGE);
+        GetCryptos(1, ROWSPERPAGE); // when going from a different component back to home / table, it restarts at page 1.
         if (SORTEDFIELD) {
             requestSort('market_cap_rank');
             if (SORTEDFIELD.direction === 'descending') {
@@ -88,6 +89,9 @@ const Table = () => {
 
     return (
         <div className='tablecomponent tablecomponent--primary'>
+            <Helmet>
+                <title>{LOADING ? `LOADING PAGE ${CURRENTPAGE}... CRYPTOSTATS 🚀💰` : 'CryptoStats: Cryptocurrency Prices, Market Cap Data, And Charts.'}</title>
+            </Helmet>
             <TablePagination />
             <div className='tablescrollable tablescrollable--primary'>
             {!INITIALLOADING ? <TableSkeleton /> : <>
