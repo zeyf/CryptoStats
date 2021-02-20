@@ -16,10 +16,10 @@ const About = () => {
                     and data visualization of price action in the form of 1 day, 7 day, 14 day, and 30 day interactive timeframe charts.
                 </p>
                 <p className='infoincons__text'>
-                    Want to see under the hood? Check out the repo, or contact the developer
+                    Want to get in touch?
                 </p>
                 <div className='infoicons infoicons--primary'>
-                    <a href='https://github.com/zeyf/CryptoStats' target='_blank' rel='noreferrer'>
+                    <a href='https://github.com/zeyf/' target='_blank' rel='noreferrer'>
                         <img className='infoicons__icon' src={GithubIcon} alt='Github icon' />
                     </a>
                     <a href='https://www.linkedin.com/in/zain-yousaf-fuentes-62353a156/' target='_blank' rel='noreferrer'>

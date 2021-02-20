@@ -11,10 +11,10 @@ const Footer = () => {
                         About Us
                 </Link>
                 <p className='connectwithdev__text'>
-                    Want to see under the hood or get in touch?
+                    Want to get in touch?
                 </p>
                 <div className='icons icons--primary'>
-                    <a href='https://github.com/zeyf/CryptoStats' className='icons__link' target='_blank' rel='noreferrer'>
+                    <a href='https://github.com/zeyf/' className='icons__link' target='_blank' rel='noreferrer'>
                         <img className='icons__icon' src={GithubWhiteIcon} alt='Github Icon' />
                     </a>
                     <a href='https://www.linkedin.com/in/zain-yousaf-fuentes-62353a156/' className='icons__link' target='_blank' rel='noreferrer'>

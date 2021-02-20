@@ -9,7 +9,9 @@ const FormatFunctions = {
         const formattednewVol = () => {
             if (String(newVol).match(numberregex)) {
                 const newVolNumSplit = newVol.replaceAll(commaregex, '').split('');
-                if (VolNumCount === 12) {
+                if (VolNumCount === 13) {
+                    return `${newVolNumSplit[0]}.${newVolNumSplit[1]}${newVolNumSplit[2]}`
+                } else if (VolNumCount === 12) {
                     return `${newVolNumSplit[0]}${newVolNumSplit[1]}${newVolNumSplit[2]}.${newVolNumSplit[3]}${newVolNumSplit[4]}`
                 } else if (VolNumCount === 11) {
                     return `${newVolNumSplit[0]}${newVolNumSplit[1]}.${newVolNumSplit[2]}${newVolNumSplit[3]}`
@@ -34,7 +36,11 @@ const FormatFunctions = {
             const AbbreviatedVolume = () => {
                 if (newVol.match(commaregex).length > 0) {
                     const CommaCount = newVol.match(commaregex).length;
-                    if (CommaCount === 3) {
+                    
+                    if (CommaCount === 4) {
+                        return `${formattednewVol()}T`
+                    }
+                    else if (CommaCount === 3) {
                         return `${formattednewVol()}B`
                     } else if (CommaCount === 2) {
                         return `${formattednewVol()}M`

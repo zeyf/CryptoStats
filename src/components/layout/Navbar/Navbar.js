@@ -84,13 +84,6 @@ const Navbar = ({darkMode, setDarkMode, ChangeStyle}) => {
                                             ABOUT US
                                         </Link>
                                     </li>
-                                    <li className='menulistsection__option'>
-                                        <Link className='menulistsection__optionlink'  to='' onClick={() => {
-                                            setShowMenu(false);
-                                        }}>
-                                            CONTACT US
-                                        </Link>
-                                    </li>
                                 </ul>
                                 <div className='searchsection searchsection--primary'>
                                     <form className='searchsection__form' onSubmit={onSubmit}>
